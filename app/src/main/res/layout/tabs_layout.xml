@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_alignParentBottom="true"
+    android:layout_gravity="bottom"
+    android:layout_weight="5"
+    android:background="#f0f0f0"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/other_service_relative"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_red_gray">
+
+        <TextView
+            android:id="@+id/other_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/apps"
+            android:textColor="#ed1c24" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/hardware_relative"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:background="@drawable/rounded_red_gray">
+
+        <TextView
+            android:id="@+id/hardware_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/hardware"
+            android:textColor="#ed1c24" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/home_relative"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_red_color">
+
+        <TextView
+            android:id="@+id/home_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/home"
+            android:textColor="#f0f0f0"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <!--ed1c24-->
+    <RelativeLayout
+        android:id="@+id/mobiles_relative"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_red_gray">
+
+        <TextView
+            android:id="@+id/mobile_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/mobiles"
+            android:textColor="#ed1c24" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/extentions_relative"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+
+        android:layout_weight="1"
+        android:background="@drawable/rounded_red_gray">
+
+        <TextView
+            android:id="@+id/extentions_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/accessories"
+            android:textColor="#ed1c24" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

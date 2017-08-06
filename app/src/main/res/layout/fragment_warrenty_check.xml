@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:clickable="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/header_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#cccccc">
+
+        <RelativeLayout
+            android:id="@+id/top_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentTop="true"
+            android:background="#ffffff"
+            android:layoutDirection="ltr">
+
+            <RelativeLayout
+                android:id="@+id/menu_icon_container"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_marginBottom="35dp"
+                    android:layout_marginEnd="35dp"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginTop="20dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_menu"
+                    android:tint="#ff0000" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/search_icon_container"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <ImageView
+                    android:id="@+id/close"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_marginBottom="35dp"
+                    android:layout_marginEnd="35dp"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginTop="20dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_close"
+                    android:tint="#ff0000" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/title_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/sp_icon_main" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:background="#cccccc"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/seperator"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/header_rel"
+        android:background="#666666" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/seperator">
+
+        <TextView
+            android:id="@+id/enter_your_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:layout_marginTop="30dp"
+            android:padding="5dp"
+            android:text="@string/to_make_sure" />
+
+        <EditText
+            android:id="@+id/warranty_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/enter_your_"
+            android:layout_margin="20dp"
+            android:hint="@string/enter_imei_code_here"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/warranty_edit_text"
+            android:layout_centerHorizontal="true"
+            android:text="@string/check" />
+
+        <RelativeLayout
+            android:id="@+id/detailsView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/check"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="11dp"
+                android:layout_marginTop="30dp"
+                android:padding="5dp"
+                android:text="Title: "
+                android:textColor="#000000" />
+
+
+            <TextView
+                android:id="@+id/valid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title"
+                android:layout_marginLeft="11dp"
+                android:padding="5dp"
+                android:text="Valid: "
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/endDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/valid"
+                android:layout_marginLeft="11dp"
+                android:padding="5dp"
+                android:text="End Date: "
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/endDate"
+                android:layout_marginLeft="11dp"
+                android:padding="5dp"
+                android:text="Note: "
+                android:textColor="#000000" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

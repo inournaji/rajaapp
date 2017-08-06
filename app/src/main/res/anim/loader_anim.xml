@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="500"
+    android:fillAfter="true"
+    android:fillEnabled="true"
+    android:fromDegrees="2"
+    android:interpolator="@android:anim/linear_interpolator"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:repeatCount="infinite"
+    android:repeatMode="restart"
+    android:startOffset="0"
+    android:toDegrees="360" />
+
+    <!--<?xml version="1.0" encoding="utf-8"?>--><!--<rotate--><!-- --><!--android:fromDegrees="2"--><!--android:toDegrees="360"--><!--android:pivotX="50%"--><!--android:pivotY="50%"--><!--android:duration="2000"--><!--android:startOffset="0"--><!--android:repeatCount="infinite"--><!--android:repeatMode="restart"--><!--android:fillEnabled="true"--><!--android:fillAfter="true"--><!--android:interpolator="@android:anim/linear_interpolator"--><!--xmlns:android="http://schemas.android.com/apk/res/android"--><!--&gt;--><!--</rotate>-->
+
+
+
+

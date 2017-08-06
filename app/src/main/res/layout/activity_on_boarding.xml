@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_on_boarding"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ee3c34">
+
+
+    <ImageView
+        android:id="@+id/sp_icon_1"
+        android:alpha="0"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/sp_icon1" />
+
+    <ImageView
+        android:id="@+id/sp_icon_2"
+        android:alpha="0"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/sp_icon2" />
+
+
+    <ImageView
+        android:id="@+id/sp_icon_4"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:alpha="0"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/sp_icon4" />
+
+
+    <ImageView
+        android:id="@+id/sp_icon_5"
+        android:layout_width="40dp"
+        android:alpha="0"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/sp_icon6" />
+
+
+    <ImageView
+        android:id="@+id/sp_icon_7"
+        android:layout_width="40dp"
+        android:alpha="0"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/sp_icon7" />
+
+    <ImageView
+        android:id="@+id/sp_icon_8"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:alpha="0"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/sp_icon8" />
+
+    <ImageView
+        android:id="@+id/sp_icon_9"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/sp_icon9" />
+
+    <ImageView
+        android:id="@+id/sp_icon_10"
+        android:layout_width="40dp"
+        android:alpha="0"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:visibility="gone"
+        android:src="@drawable/sp_icon10" />
+
+    <ImageView
+        android:id="@+id/sp_icon_11"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:alpha="0"
+        android:layout_above="@+id/app_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="33dp"
+        android:src="@drawable/sp_icon12" />
+
+
+    <ImageView
+        android:id="@+id/sp_icon_12"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:alpha="0"
+        android:layout_below="@+id/app_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:src="@drawable/sp_icon11" />
+
+
+    <ImageView
+        android:id="@+id/sp_icon_13"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:alpha="0"
+        android:layout_alignBottom="@+id/sp_icon_11"
+        android:layout_marginBottom="35dp"
+        android:layout_marginRight="55dp"
+        android:layout_toStartOf="@+id/sp_icon_11"
+        android:src="@drawable/sp_icon13" />
+
+
+    <ImageView
+        android:id="@+id/sp_icon_14"
+        android:alpha="0"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/app_title"
+        android:layout_alignBottom="@+id/sp_icon_11"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:layout_marginLeft="55dp"
+        android:layout_toEndOf="@+id/sp_icon_11"
+        android:src="@drawable/sp_icon14" />
+
+
+    <ImageView
+        android:id="@+id/sp_icon_15"
+        android:layout_width="40dp"
+        android:alpha="0"
+        android:layout_height="40dp"
+        android:layout_below="@+id/sp_icon_12"
+        android:layout_marginRight="55dp"
+        android:layout_marginTop="15dp"
+        android:layout_toStartOf="@+id/sp_icon_12"
+        android:src="@drawable/sp_icon15" />
+
+
+    <ImageView
+        android:id="@+id/sp_icon_16"
+        android:layout_width="40dp"
+        android:alpha="0"
+        android:layout_height="40dp"
+        android:layout_below="@+id/sp_icon_12"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/sp_icon_12"
+        android:src="@drawable/sp_icon16" />
+
+
+    <ImageView
+        android:id="@+id/splash_img"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
+
+
+
+    <ImageView
+        android:id="@+id/app_title"
+        android:layout_width="500dp"
+        android:layout_height="220dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/new_logo"
+        android:visibility="visible" />
+
+
+
+
+</RelativeLayout>

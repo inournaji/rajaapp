@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/pager_relative"
+        android:layout_width="match_parent"
+        android:layout_height="240dp">
+
+        <WebView
+            android:id="@+id/video_web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff" />
+
+        <RelativeLayout
+            android:id="@+id/relative"
+            android:layout_width="77dp"
+            android:layout_height="77dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/circle_loader"
+            android:visibility="visible">
+
+
+            <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/loader"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerInParent="true"
+                android:visibility="visible"
+                app:indicatorColor="#FF2222"
+                app:indicatorName="BallGridPulseIndicator" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/xxbutom"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:background="#90000000"
+        android:padding="8dp"
+        android:src="@drawable/ic_close"
+        android:tint="#ffffff" />
+
+
+</RelativeLayout>
