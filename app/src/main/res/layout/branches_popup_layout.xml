@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:cardBackgroundColor="#ffffff"
+        app:cardCornerRadius="9dp"
+        app:cardElevation="8dp">
+
+        <RelativeLayout
+            android:id="@+id/dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/branches_title_textview"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingBottom="10dp"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp"
+                android:paddingTop="10dp"
+                android:background="@color/app_red_color"
+                android:text="Information title"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:typeface="monospace"
+                android:textSize="18sp" />
+
+
+            <View
+                android:id="@+id/seperator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/branches_title_textview"
+                android:background="#000000" />
+
+            <RelativeLayout
+                android:id="@+id/popup_second_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/seperator">
+
+                <TextView
+                    android:id="@+id/branches_details_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:lineSpacingExtra="4dp"
+                    android:paddingLeft="18dp"
+                    android:paddingRight="18dp"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                    android:textColor="#444444"
+                    android:textSize="16sp" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/branches_details_textview"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center">
+
+                    <View
+                        android:id="@+id/sep"
+                        android:layout_width="10dp"
+                        android:layout_height="80dp"
+                        android:layout_centerHorizontal="true" />
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_toLeftOf="@+id/sep"
+                        android:layout_marginTop="25dp"
+                        app:cardBackgroundColor="#eeeeee"
+                        app:cardElevation="5dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        app:cardCornerRadius="4dp"
+                        android:layout_height="45dp">
+
+                        <TextView
+                            android:id="@+id/positive_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@string/visit"
+                            android:textColor="#666666"
+                            android:textSize="13sp" />
+
+
+                    </android.support.v7.widget.CardView>
+
+
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_toRightOf="@+id/sep"
+                        android:layout_marginTop="25dp"
+                        app:cardBackgroundColor="#eeeeee"
+                        app:cardElevation="5dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        app:cardCornerRadius="4dp"
+                        android:layout_height="45dp">
+
+                    <TextView
+                        android:id="@+id/negative_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/close"
+                        android:textColor="#666666"
+                        android:textSize="13sp" />
+
+                    </android.support.v7.widget.CardView>
+
+                </RelativeLayout>
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

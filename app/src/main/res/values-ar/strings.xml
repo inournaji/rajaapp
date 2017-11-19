@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="apps">التطبيقات</string>
+    <string name="hardware">قطع\nالصيانة</string>
+    <string name="home">الرئيسية</string>
+    <string name="mobiles">موبايل</string>
+    <string name="accessories">اكسسوار</string>
+    <string name="to_make_sure">لتفعيل كفالة رجا تك على موبايلك يرجى ادخال رقم هاتفك ادناه و الضغط على زر تفعيل الكفالة</string>
+    <string name="enter_imei_code_here">رمز IMEI (يرجى قبول إذن لإضافته)</string>
+    <string name="check">تأكد</string>
+    <string name="gallery">المعرض</string>
+    <string name="warranty">تفعيل الكفالة</string>
+    <string name="offers">العروض</string>
+    <string name="feedback">تواصل معنا</string>
+    <string name="branches">فروعنا</string>
+    <string name="term_and_conditions">شروط الكفالة</string>
+    <string name="join_us_on_facebook">انضم إلينا على فيسبوك</string>
+    <string name="smartAccessort">اكسسوار ذكية</string>
+    <string name="last_update_seting">Prices last update:</string>
+    <string name="termsAndConditions"></string>
+    <string name="enter_your_name">أدخل اسمك</string>
+    <string name="name">الاسم</string>
+    <string name="mobile">رقم الجوال</string>
+    <string name="enter_your_mobile">أدخل رقم هاتفك الجوال</string>
+    <string name="message">اقتراح</string>
+    <string name="enter_your_message">أدخل رسالتك هنا</string>
+    <string name="submit">إرسال</string>
+    <string name="congrads">تم</string>
+    <string name="feedback_successfully">تم إرساله بنجاح إلى موقع الدعم</string>
+    <string name="thanks">شكرا!</string>
+    <string name="cannotBeLessThan10">لا يمكن أن يقل عن 10 أحرف</string>
+    <string name="cannotBeEmpty">لايمكن ان يكون فارغا</string>
+    <string name="sorry">معذرة!</string>
+    <string name="pleaseWaitTillTheOtherIsStaring">There is other app in download progress, please wait or till the old one is finished or stop the download.</string>
+    <string name="pendding">في الإنتظار</string>
+    <string name="resume">متابعة</string>
+    <string name="Download">تنزيل</string>
+    <string name="our_braches">فروعنا</string>
+    <string name="downloadGooglePlayServices">يرجى تحميل أحدث خدمات جوجل</string>
+    <string name="yourLocation">موقعك</string>
+    <string name="connectionError">لديك مشكلة في الاتصال، يرجى إعادة المحاولة لاحقا.</string>
+    <string name="ok">حسنا</string>
+    <string name="validity"> الصلاحية:</string>
+    <string name="valid1">الصلاحية: غير صالحة </string>
+    <string name="endDate">تاريخ الانتهاء: </string>
+    <string name="noteString">ملاحظات: </string>
+    <string name="imeiString">رمز الهاتف: </string>
+    <string name="enter_mobile_number">أدخل رقم هاتفك المحمول</string>
+    <string name="warrantyError">تأكد من إدخال رمز و رقم الجوال.</string>
+    <string name="visit">زيارة</string>
+    <string name="close">أغلق</string>
+
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <fragment
+        android:id="@+id/map"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitXY" />
+
+    <!--android:background="@drawable/base_activity_gradient"-->
+
+    <RelativeLayout
+        android:id="@+id/googleRel"
+        android:layout_width="match_parent"
+        android:background="#cccccc"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/app_red_color"
+            android:layout_centerInParent="true"
+            android:padding="10dp"
+            android:typeface="sans"
+            android:text="@string/downloadGooglePlayServices" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
