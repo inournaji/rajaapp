@@ -83,16 +83,16 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (newsArrayList.get(position).getVideo() != null &&
                     newsArrayList.get(position).getVideo().trim().length() > 0 &&
                     !newsArrayList.get(position).getVideo().equalsIgnoreCase("[]")) {
-                System.out.println("HomeListAdapter.getItemViewType : Video type");
-                System.out.println("HomeListAdapter.getItemViewType, the video =  " + newsArrayList.get(position).getVideo());
+//                System.out.println("HomeListAdapter.getItemViewType : Video type");
+//                System.out.println("HomeListAdapter.getItemViewType, the video =  " + newsArrayList.get(position).getVideo());
                 return ViewType.VideoViewType.getValue();
             } else {
-                System.out.println("HomeListAdapter.getItemViewType : Video photo");
+//                System.out.println("HomeListAdapter.getItemViewType : Video photo");
                 return ViewType.PhotoViewType.getValue();
             }
 
         } else {
-            System.out.println("HomeListAdapter.getItemViewType : Video Default");
+//            System.out.println("HomeListAdapter.getItemViewType : Video Default");
             return super.getItemViewType(position);
         }
     }

@@ -22,6 +22,9 @@ import java.util.Locale;
 
 public class NotificationServiceForOneSignal extends NotificationExtenderService {
 
+
+
+
     @Override
     protected boolean onNotificationProcessing(OSNotificationReceivedResult receivedResult) {
         Log.i("OneSignalExample", "onNotificationProcessing");
@@ -56,7 +59,6 @@ public class NotificationServiceForOneSignal extends NotificationExtenderService
 
                 return builder;
             }
-
 
         };
         Log.i("OneSignalExample", "onNotificationProcessing");

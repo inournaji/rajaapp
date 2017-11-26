@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="apps">التطبيقات</string>
-    <string name="hardware">قطع\nالصيانة</string>
+    <string name="warrantyActivation">الكفالة</string>
     <string name="home">الرئيسية</string>
     <string name="mobiles">موبايل</string>
     <string name="accessories">اكسسوار</string>
@@ -49,5 +49,7 @@
     <string name="warrantyError">تأكد من إدخال رمز و رقم الجوال.</string>
     <string name="visit">زيارة</string>
     <string name="close">أغلق</string>
+    <string name="startDate">تاريخ البدء:</string>
+    <string name="activate">تفعيل الكفالة</string>
 
 </resources>

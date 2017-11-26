@@ -29,23 +29,24 @@
 
 
     <RelativeLayout
-        android:id="@+id/hardware_relative"
+        android:id="@+id/extentions_relative"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0"
+        android:layout_weight="1"
         android:background="@drawable/rounded_red_gray">
 
         <TextView
-            android:id="@+id/hardware_icon"
+            android:id="@+id/extentions_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
             android:typeface="serif"
-            android:text="@string/hardware"
+            android:text="@string/accessories"
             android:textColor="@color/app_red_color" />
 
     </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/home_relative"
@@ -87,25 +88,24 @@
     </RelativeLayout>
 
 
+
     <RelativeLayout
-        android:id="@+id/extentions_relative"
+        android:id="@+id/hardware_relative"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-
         android:layout_weight="1"
         android:background="@drawable/rounded_red_gray">
 
         <TextView
-            android:id="@+id/extentions_icon"
+            android:id="@+id/hardware_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
             android:typeface="serif"
-            android:text="@string/accessories"
+            android:text="@string/warrantyActivation"
             android:textColor="@color/app_red_color" />
 
     </RelativeLayout>
-
 
 </LinearLayout>

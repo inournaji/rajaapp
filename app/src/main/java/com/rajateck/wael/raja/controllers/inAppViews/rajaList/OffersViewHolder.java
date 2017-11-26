@@ -51,7 +51,8 @@ public class OffersViewHolder extends RecyclerView.ViewHolder {
         }
 
 
-        if (offerItem.getBigImage() != null) {
+        if (offerItem.getBigImage() != null &&
+                offerItem.getBigImage().trim().length() > 0) {
             bigImage.setVisibility(View.VISIBLE);
 
 
@@ -61,6 +62,8 @@ public class OffersViewHolder extends RecyclerView.ViewHolder {
                     .crossFade()
                     .into(bigImage);
 
+        } else {
+            bigImage.setVisibility(View.GONE);
         }
 
         offerDetail.setText(offerItem.getBody().getValue());

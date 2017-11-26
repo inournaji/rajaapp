@@ -24,6 +24,7 @@ import com.rajateck.wael.raja.utils.cacheUtils.RajaCacheUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 
 import fr.arnaudguyon.tabstacker.TabStacker;
@@ -146,6 +147,13 @@ public class OffersFragment extends Fragment implements TabStacker.TabStackInter
 
         linearLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         listRecycler.setLayoutManager(linearLayoutManager);
+
+        if (offersList == null) {
+            offersList = new ArrayList<>();
+        }
+
+
+        Collections.reverse(offersList);
 
         RajaListAdapter rajaListAdapter = new RajaListAdapter(getActivity(), offersList, getActivity());
         listRecycler.setAdapter(rajaListAdapter);

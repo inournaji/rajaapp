@@ -7,7 +7,7 @@ package com.rajateck.wael.raja.connection;
 public enum APIEndpoints {
 
     BaseURL("http://raja.webersapps.com/api"),
-    MigratedBaseURL("http://rajatec.net/api"),
+    MigratedBaseURL("https://rajatec.net/en/api"),
     GetMobileList(MigratedBaseURL.getLink() + "/mobile"),
     GetHomeList(MigratedBaseURL.getLink() + "/home"),
     GetAccessoriesLink(MigratedBaseURL.getLink() + "/mobile-accessories"),

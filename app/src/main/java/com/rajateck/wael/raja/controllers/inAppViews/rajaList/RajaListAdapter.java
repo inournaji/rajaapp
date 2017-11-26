@@ -23,6 +23,7 @@ import com.liulishuo.filedownloader.FileDownloadSampleListener;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.util.FileDownloadUtils;
 import com.rajateck.wael.raja.R;
+import com.rajateck.wael.raja.controllers.inAppViews.rajaList.holders.AccessoryViewHolder;
 import com.rajateck.wael.raja.controllers.inAppViews.rajaList.holders.MobileViewHolder;
 import com.rajateck.wael.raja.enums.FragmentTags;
 import com.rajateck.wael.raja.models.AccessoryItem;
@@ -104,7 +105,7 @@ public class RajaListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.context = activity;
         this.activity = activity;
         this.hardWareItems = hardWareItems;
-        this.fragmentTag = FragmentTags.HardWareFragment;
+        this.fragmentTag = FragmentTags.WarrantyFragment;
     }
 
 
@@ -129,6 +130,9 @@ public class RajaListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } else if (fragmentTag.equals(FragmentTags.MobileFragment)) {
             View view = inflater.inflate(R.layout.recycler_list_mobile_layout, parent, false);
             viewHolder = new MobileViewHolder(view);
+        } else if (fragmentTag.equals(FragmentTags.ExtensionsFragment)) {
+            View view = inflater.inflate(R.layout.recycler_list_mobile_layout, parent, false);
+            viewHolder = new AccessoryViewHolder(view);
         } else {
             View view = inflater.inflate(R.layout.recycler_list_item, parent, false);
             viewHolder = new RagaListItem(view);
@@ -143,7 +147,7 @@ public class RajaListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             ((MobileViewHolder) holder).onbind(mobiles.get(position), context);
 
-        } else if (fragmentTag.equals(FragmentTags.HardWareFragment)) {
+        } else if (fragmentTag.equals(FragmentTags.WarrantyFragment)) {
             Glide.with(context)
                     .load(hardWareItems.get(position).getImage())
                     .placeholder(R.drawable.news_placeholder)
@@ -193,6 +197,8 @@ public class RajaListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((RagaListItem) holder).getOldPricel().setText(((Mobile) searchItems.get(position)).getPrice());
             } else if (searchItems.get(position) instanceof AccessoryItem) {
                 System.out.println("RajaListAdapter.onBindViewHolder: here is the data Accessory.");
+
+
                 Glide.with(context)
                         .load(((AccessoryItem) searchItems.get(position)).getImage().get(0))
                         .placeholder(R.drawable.news_placeholder)
@@ -223,58 +229,12 @@ public class RajaListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-//            Glide.with(context)
-//                    .load(accessoryItems.get(position).getImage().get(0))
-//                    .placeholder(R.drawable.news_placeholder)
-//                    .fitCenter()
-//                    .listener(new RequestListener<String, GlideDrawable>() {
-//                        @Override
-//                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-//                            ((RagaListItem) holder).getIcon_holder().setVisibility(View.VISIBLE);
-//                            System.out.println("RajaListAdapter.onException : happens");
-//                            return false;
-//                        }
-//
-//                        @Override
-//                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-//                            if (((RagaListItem) holder).getIcon_holder() != null) {
-//                                ((RagaListItem) holder).getIcon_holder().setVisibility(View.GONE);
-//                            }
-//                            return false;
-//                        }
-//                    })
-//                    .into(((RagaListItem) holder).getIcon());
-//            ((RagaListItem) holder).getItemName().setText(accessoryItems.get(position).getTitle());
-//            ((RagaListItem) holder).getOldPricel().setText(accessoryItems.get(position).getPrice());
 
-            Glide.with(context)
-                    .load(accessoryItems.get(position).getImage().get(0))
-                    .fitCenter()
-                    .crossFade()
-                    .listener(new RequestListener<String, GlideDrawable>() {
-                        @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                            if (((RagaListItem) holder).getIcon_holder() != null) {
-//                                ((RagaListItem) holder).getIcon_holder().setVisibility(View.GONE);
-                            }
-                            ((RagaListItem) holder).getIcon().setVisibility(View.VISIBLE);
-                            return false;
-                        }
-                    })
-                    .into(((RagaListItem) holder).getIcon());
-
-
-            ((RagaListItem) holder).getItemName().setText(accessoryItems.get(position).getTitle());
-            ((RagaListItem) holder).getOldPricel().setText(accessoryItems.get(position).getPrice());
+            ((AccessoryViewHolder) holder).onbind(accessoryItems.get(position), context);
 
         } else if (fragmentTag.equals(FragmentTags.OffersFragment)) {
 
-            ((OffersViewHolder) holder).onBind (context, OffersItems.get(position));
+            ((OffersViewHolder) holder).onBind(context, OffersItems.get(position));
 
         } else {
             if (fragmentTag.equals(FragmentTags.ApplicationFragment)) {
@@ -369,33 +329,15 @@ public class RajaListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         @Override
                         public void onClick(View view) {
                             System.out.println("RajaListAdapter.onClick : here to install the app .");
-//                            try {
-//                                if (baseDownloadTask != null  &&
-//                                        baseDownloadTask.isRunning() &&
-//                                        !baseDownloadTask.getFilename().equalsIgnoreCase(applicationsBackend.get(position).getTitle() + ".apk")) {
-//                                    System.out.println("RajaListAdapter.onClick : there is other download ...");
-//                                    showAlertDialog(context.getString(R.string.sorry),
-//                                            context.getString(R.string.pleaseWaitTillTheOtherIsStaring));
-//
-//                                } else {
-//                                    System.out.println("RajaListAdapter.onClick : here to start downloading");
-//                                    baseDownloadTask = downloadfile(applicationsBackend.get(position), holder);
-//                                    baseDownloadTask.start();
-//                                }
-//                            } catch (Exception ex) {
-//                                ex.printStackTrace();
                             System.out.println("RajaListAdapter.onClick : here to start downloading");
 
                             baseDownloadTask = downloadfile(applicationsBackend.get(position), holder);
                             baseDownloadTask.start();
-//                            }
                         }
 
                         private BaseDownloadTask downloadfile(final AndroidApplication androidApplication, final RecyclerView.ViewHolder holder) {
-//                            ((RagaListItem) holder).getApp_progress().setVisibility(View.VISIBLE);
                             ((RagaListItem) holder).getStop_downloading().setVisibility(View.VISIBLE);
                             String path = FileDownloadUtils.getDefaultSaveRootPath() + File.separator + "tmpdir1" + File.separator + androidApplication.getTitle() + ".apk";
-//                        String url = androidApplication.getApk();
                             String url = androidApplication.getApk();
                             return FileDownloader.getImpl().create(url)
                                     .setPath(path, false)
@@ -407,7 +349,6 @@ public class RajaListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                         @Override
                                         protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
                                             super.pending(task, soFarBytes, totalBytes);
-//                                        ((ViewHolder) task.getTag()).updatePending(task);
                                             ((RagaListItem) holder).getDownload().setVisibility(View.VISIBLE);
                                             ((RagaListItem) holder).getDownload().setText(R.string.pendding);
                                             ((RagaListItem) holder).getApp_progress().setVisibility(View.GONE);
@@ -428,15 +369,11 @@ public class RajaListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                             System.out.println("RajaListAdapter.progress : value = " + value.intValue());
                                             ((RagaListItem) holder).getApp_progress().setProgress(value.intValue());
 
-
-//                                        ((RecyclerView.ViewHolder) task.getTag()).updateProgress(soFarBytes, totalBytes,
-//                                                task.getSpeed());
                                         }
 
                                         @Override
                                         protected void error(BaseDownloadTask task, Throwable e) {
                                             super.error(task, e);
-//                                        ((ViewHolder) task.getTag()).updateError(e, task.getSpeed());
                                             System.out.println("RajaListAdapter.error : error happened :" + e.toString());
                                             e.printStackTrace();
                                             ((RagaListItem) holder).getDownload().setVisibility(View.VISIBLE);
@@ -448,7 +385,6 @@ public class RajaListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                         @Override
                                         protected void connected(BaseDownloadTask task, String etag, boolean isContinue, int soFarBytes, int totalBytes) {
                                             super.connected(task, etag, isContinue, soFarBytes, totalBytes);
-//                                        ((ViewHolder) task.getTag()).updateConnected(etag, task.getFilename());
                                             System.out.println("RajaListAdapter.connected : " + task.getFilename());
                                         }
 
@@ -456,7 +392,6 @@ public class RajaListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                         protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
                                             super.paused(task, soFarBytes, totalBytes);
                                             System.out.println("RajaListAdapter.paused :" + task.getSpeed());
-//                                        ((ViewHolder) task.getTag()).updatePaused(task.getSpeed());
                                         }
 
                                         @Override
@@ -464,7 +399,6 @@ public class RajaListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                             super.completed(task);
                                             System.out.println("RajaListAdapter.completed");
                                             ((RagaListItem) holder).getApp_progress().setVisibility(View.VISIBLE);
-//                                        ((ViewHolder) task.getTag()).updateCompleted(task);
                                             ((RagaListItem) holder).getApp_progress().setVisibility(View.GONE);
 
                                             ((RagaListItem) holder).getDownload().setVisibility(View.VISIBLE);
@@ -478,15 +412,12 @@ public class RajaListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                                 ex.printStackTrace();
                                                 Toast.makeText(context, "install it from file explorer", Toast.LENGTH_SHORT).show();
                                             }
-
-
                                         }
 
                                         @Override
                                         protected void warn(BaseDownloadTask task) {
                                             super.warn(task);
                                             System.out.println("RajaListAdapter.warn");
-//                                        ((ViewHolder) task.getTag()).updateWarn();
                                         }
                                     });
                         }

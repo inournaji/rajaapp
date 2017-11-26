@@ -63,7 +63,7 @@ public class AccessoryListAdapter extends RecyclerView.Adapter<RecyclerView.View
             ((RagaListItem) holder).getItemName().setText(mobiles.get(position).getTitle());
             ((RagaListItem) holder).getOldPricel().setText(mobiles.get(position).getPrice());
 
-        } else if (fragmentTag.equals(FragmentTags.HardWareFragment)) {
+        } else if (fragmentTag.equals(FragmentTags.WarrantyFragment)) {
             ((RagaListItem) holder).getItemName().setText("Hardware");
 //            ((RagaListItem) holder).getIcon().setBackgroundResource(R.drawable.testhardware);
 

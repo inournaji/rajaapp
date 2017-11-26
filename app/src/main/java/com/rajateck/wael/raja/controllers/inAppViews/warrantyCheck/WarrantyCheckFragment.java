@@ -45,11 +45,18 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
     private TextView title;
     private TextView valid;
     private TextView endDate;
+    private TextView startDate;
     private TextView note;
     private RelativeLayout detailsView;
+    private Boolean removeHeader;
+    private RelativeLayout top_bar_layout;
 
     public WarrantyCheckFragment() {
         // Required empty public constructor
+    }
+
+    public WarrantyCheckFragment(boolean b) {
+        this.removeHeader = b;
     }
 
     public static WarrantyCheckFragment newInstance(String param1, String param2) {
@@ -71,7 +78,9 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
         valid = (TextView) rootView.findViewById(R.id.valid);
         detailsView = (RelativeLayout) rootView.findViewById(R.id.detailsView);
         endDate = (TextView) rootView.findViewById(R.id.endDate);
+        startDate = (TextView) rootView.findViewById(R.id.startDate);
         note = (TextView) rootView.findViewById(R.id.note);
+        top_bar_layout = rootView.findViewById(R.id.top_bar_layout);
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,60 +124,22 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
                                                                    System.out.println("warrentyCheckDetails = [" + warrentyCheckDetails.getStatus() + "]");
                                                                    System.out.println("warrentyCheckDetails = [" + warrentyCheckDetails.getError() + "]");
 
+
                                                                } catch (Exception ex) {
                                                                    ex.printStackTrace();
                                                                }
 
                                                                ScreenUtils.dismissLoader();
 
-                                                               try {
-
-                                                                   if (warrentyCheckDetails != null &&
-                                                                           warrentyCheckDetails.getStart_date() != null &&
-                                                                           warrentyCheckDetails.getEnd_date() != null &&
-                                                                           warrentyCheckDetails.getEnd_date().length() > 0 &&
-                                                                           warrentyCheckDetails.getStart_date().length() > 0) {
+                                                               if (warrentyCheckDetails != null &&
+                                                                       warrentyCheckDetails.getStart_date() != null &&
+                                                                       warrentyCheckDetails.getEnd_date() != null &&
+                                                                       warrentyCheckDetails.getEnd_date().length() > 0 &&
+                                                                       warrentyCheckDetails.getStart_date().length() > 0) {
 
 
-                                                                       RajaCacheUtils.cacheThisWarrantyCheckData(getActivity(), warrentyCheckDetails);
-
-                                                                       detailsView.setVisibility(View.VISIBLE);
-                                                                       if (warrentyCheckDetails.getImei1() != null) {
-                                                                           title.setText(getString(R.string.imeiString) + " " + warrentyCheckDetails.getImei1());
-                                                                       } else {
-                                                                           title.setText("");
-                                                                       }
-
-                                                                       if (warrentyCheckDetails.getStatus().equalsIgnoreCase("0")) {
-                                                                           valid.setText(R.string.valid1);
-                                                                       } else {
-                                                                           valid.setText(getString(R.string.validity) + " " + warrentyCheckDetails.getStatus());
-                                                                       }
-
-                                                                       if (warrentyCheckDetails.getEnd_date() != null) {
-                                                                           endDate.setText(getString(R.string.endDate) + " " + warrentyCheckDetails.getEnd_date());
-                                                                       } else {
-                                                                           endDate.setText("");
-                                                                       }
-
-                                                                       if (warrentyCheckDetails.getNotes() != null &&
-                                                                               warrentyCheckDetails.getNotes().trim().length() != 0) {
-                                                                           note.setText(getString(R.string.noteString) + " " + warrentyCheckDetails.getNotes());
-                                                                       } else {
-                                                                           note.setText("");
-                                                                       }
-
-                                                                   } else if (warrentyCheckDetails != null &&
-                                                                           warrentyCheckDetails.getError() != null) {
-
-                                                                       showErrorMessage(getString(R.string.sorry), warrentyCheckDetails.getError());
-
-                                                                   } else {
-                                                                       showErrorMessage(getString(R.string.sorry), getString(R.string.connectionError));
-                                                                   }
-
-                                                               } catch (Exception ex) {
-                                                                   ex.printStackTrace();
+                                                                   RajaCacheUtils.cacheThisWarrantyCheckData(getActivity(), warrentyCheckDetails);
+                                                                   checkCachedData();
                                                                }
 
                                                            }
@@ -256,9 +227,25 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
         findViews(inflatedView);
         getDeviceIMEI();
         checkCachedData();
+        validateHomeScreen();
 
 
         return inflatedView;
+    }
+
+
+    //this method to remove the close (call from home page)
+    private void validateHomeScreen() {
+        if (removeHeader != null &&
+                removeHeader) {
+            System.out.println("WarrantyCheckFragment.validateHomeScreen : here to remove the header");
+
+            top_bar_layout.getLayoutParams().height = 0;
+            seperator.getLayoutParams().height = 0;
+
+        } else {
+            System.out.println("WarrantyCheckFragment.validateHomeScreen : no need to remove the header");
+        }
     }
 
     private void checkCachedData() {
@@ -275,31 +262,43 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
                 System.out.println("WarrantyCheckFragment.checkCachedData : here to hide the check warrenty items");
                 warrantyEditText.getLayoutParams().height = 0;
                 check.getLayoutParams().height = 0;
+                mobileEditText.getLayoutParams().height = 0;
+                enterYour.getLayoutParams().height = 0;
 
                 detailsView.setVisibility(View.VISIBLE);
                 if (warrentyCheckDetails.getImei1() != null) {
-                    title.setText(getString(R.string.imeiString) + " " + warrentyCheckDetails.getImei1());
+                    title.setText(getString(R.string.imeiString) + "  " + warrentyCheckDetails.getImei1());
                 } else {
                     title.setText("");
+                    title.setVisibility(View.GONE);
                 }
 
                 if (warrentyCheckDetails.getStatus().equalsIgnoreCase("0")) {
                     valid.setText(R.string.valid1);
                 } else {
-                    valid.setText(getString(R.string.validity) + " " + warrentyCheckDetails.getStatus());
+                    valid.setText(getString(R.string.validity) + "  " + warrentyCheckDetails.getStatus());
                 }
 
                 if (warrentyCheckDetails.getEnd_date() != null) {
-                    endDate.setText(getString(R.string.endDate) + " " + warrentyCheckDetails.getEnd_date());
+                    endDate.setText(getString(R.string.endDate) + "  " + warrentyCheckDetails.getEnd_date());
                 } else {
                     endDate.setText("");
+                    endDate.setVisibility(View.GONE);
                 }
 
+
+                if (warrentyCheckDetails.getStart_date() != null) {
+                    startDate.setText(getString(R.string.startDate) + "  " + warrentyCheckDetails.getStart_date());
+                } else {
+                    startDate.setText("");
+                    startDate.setVisibility(View.GONE);
+                }
                 if (warrentyCheckDetails.getNotes() != null &&
                         warrentyCheckDetails.getNotes().trim().length() != 0) {
-                    note.setText(getString(R.string.noteString) + " " + warrentyCheckDetails.getNotes());
+                    note.setText(getString(R.string.noteString) + "  " + warrentyCheckDetails.getNotes());
                 } else {
                     note.setText("");
+                    note.setVisibility(View.GONE);
                 }
 
             } else {

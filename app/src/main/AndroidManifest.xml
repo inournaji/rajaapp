@@ -50,6 +50,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBXYteBCeNhK6xYU8EtmrdjuO382Dbnxqs" />
 
+        <meta-data
+            android:name="com.onesignal.NotificationOpened.DEFAULT"
+            android:value="DISABLE" />
+
 
         <activity
             android:name="com.rajateck.wael.raja.controllers.onBoarding.OnBoardingActivity"
@@ -78,6 +82,7 @@
         <service
             android:name="com.rajateck.wael.raja.controllers.NotificationServiceForOneSignal"
             android:exported="false">
+
             <intent-filter>
 
                 <action android:name="com.onesignal.NotificationExtender" />

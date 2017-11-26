@@ -80,7 +80,8 @@ public class OnBoardingActivity extends FragmentActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-        setContentView(R.layout.activity_on_boarding_2);
+//        setContentView(R.layout.activity_on_boarding_2);
+        setContentView(R.layout.activity_on_boarding);
         //startOldAnimation();
         validateLocalizaiton();
         findViews();
@@ -185,6 +186,9 @@ public class OnBoardingActivity extends FragmentActivity {
             public void run() {
                 done = true;
                 Intent intent = new Intent(OnBoardingActivity.this, BaseActivity.class);
+
+                intent.putExtra(getString(R.string.notificationExtra), false);
+
                 startActivity(intent);
                 overridePendingTransition(R.anim.right_in, R.anim.no_anim);
                 finish();
@@ -258,7 +262,7 @@ public class OnBoardingActivity extends FragmentActivity {
     private void startPulse(final View view, final int delay, final int duration) {
         final int duration_temp = 900;
 
-        System.out.println("OnBoardingActivity.startPulse : here zoomin");
+//        System.out.println("OnBoardingActivity.startPulse : here zoomin");
         view.animate().setListener(new android.animation.Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(android.animation.Animator animator) {

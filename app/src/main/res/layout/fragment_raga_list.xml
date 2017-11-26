@@ -36,7 +36,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#ffffff"
-            android:overScrollMode="never" />
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingBottom="25dp" />
+
     </com.dinuscxj.refresh.RecyclerRefreshLayout>
 
 
@@ -53,19 +56,19 @@
 
     <TextView
         android:id="@+id/lastupdate"
-        android:visibility="gone"
-        android:typeface="serif"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:textSize="14sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_alignParentBottom="true"
-        android:textColor="#ffffff"
         android:layout_marginBottom="2dp"
-        android:text="last update: 04/05/2016"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/rounded_last_updated"
         android:gravity="center"
-        android:background="@drawable/rounded_last_updated"/>
+        android:text="last update: 04/05/2016"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:typeface="serif"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

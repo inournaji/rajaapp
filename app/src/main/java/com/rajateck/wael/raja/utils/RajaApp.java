@@ -10,10 +10,8 @@ import com.lifeofcoding.cacheutlislibrary.CacheUtils;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
 import com.liulishuo.filedownloader.services.DownloadMgrInitialParams;
-import com.onesignal.OSNotification;
 import com.onesignal.OneSignal;
-
-import org.json.JSONObject;
+import com.rajateck.wael.raja.utils.notificationUtils.RajaNotificationOpenedHandler;
 
 import java.net.Proxy;
 import java.util.Locale;
@@ -61,23 +59,8 @@ public class RajaApp extends Application {
 
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .setNotificationOpenedHandler(new RajaNotificationOpenedHandler(getApplicationContext()))
                 .unsubscribeWhenNotificationsAreDisabled(true)
-                .setNotificationReceivedHandler(new OneSignal.NotificationReceivedHandler() {
-                    @Override
-                    public void notificationReceived(OSNotification notification) {
-
-                        System.out.println("RajaApp.notificationReceived");
-                        try {
-//                            System.out.println("RajaApp.notificationReceived : " + notification.toJSONObject());
-                            JSONObject data = notification.payload.additionalData;
-                            System.out.println("RajaApp.notificationReceived : data = " + data.toString());
-
-
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                })
                 .init();
 
 

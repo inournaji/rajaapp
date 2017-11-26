@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -63,7 +64,7 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
     private FrameLayout Offers_frame;
     private TabStacker tabStacker;
     private TabStacker tabStackerFull;
-    private RelativeLayout hardwareRelative;
+    private RelativeLayout warrantyRelative;
     private RelativeLayout extentionsRelative;
     private RelativeLayout mobilesRelative;
     private RelativeLayout homeRelative;
@@ -79,7 +80,7 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
     private TextView home_icon;
     private TextView mobile_icon;
     private TextView extentions_icon;
-    private TextView hardware_icon;
+    private TextView warranty_icon;
     private TextView other_icon;
     private LinearLayout exp_expand;
     private DropDownAnimation dropDownAnimation;
@@ -112,6 +113,7 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
         initialize_drawer_open_close();
         validateLanguageUI();
         validatePackage();
+        checkNotificationOpenedProcess();
 
         if (savedInstanceState != null) {
             tabStacker.restoreInstance(savedInstanceState);
@@ -120,6 +122,22 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
         }
 
         homeRelative.performClick();
+    }
+
+    private void checkNotificationOpenedProcess() {
+
+        boolean isNotifiationIntent = getIntent().getBooleanExtra(getResources().getString(R.string.notificationExtra), false);
+
+        if (isNotifiationIntent) {
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    openOffersScreen();
+                }
+            }, 1000);
+        }
+
     }
 
     private void changeStatusBarColor() {
@@ -192,8 +210,8 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
                     ChangeHeaderView(FragmentTags.ExtensionsFragment);
                     mDrawerLayout.closeDrawer(Gravity.LEFT);
                 } else if (position == 3) {
-                    onClickOnTab(FragmentTags.HardWareFragment);
-                    ChangeHeaderView(FragmentTags.HardWareFragment);
+                    onClickOnTab(FragmentTags.WarrantyFragment);
+                    ChangeHeaderView(FragmentTags.WarrantyFragment);
                     mDrawerLayout.closeDrawer(Gravity.LEFT);
                 }
             }
@@ -207,11 +225,11 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
         home_icon = (TextView) findViewById(R.id.home_icon);
         mobile_icon = (TextView) findViewById(R.id.mobile_icon);
         extentions_icon = (TextView) findViewById(R.id.extentions_icon);
-        hardware_icon = (TextView) findViewById(R.id.hardware_icon);
+        warranty_icon = (TextView) findViewById(R.id.hardware_icon);
         other_icon = (TextView) findViewById(R.id.other_icon);
         tabStacker = new TabStacker(getSupportFragmentManager(), R.id.fragmentHolder);
         tabStackerFull = new TabStacker(getSupportFragmentManager(), R.id.fragmentHolderFull);
-        hardwareRelative = (RelativeLayout) findViewById(R.id.hardware_relative);
+        warrantyRelative = (RelativeLayout) findViewById(R.id.hardware_relative);
         extentionsRelative = (RelativeLayout) findViewById(R.id.extentions_relative);
         mobilesRelative = (RelativeLayout) findViewById(R.id.mobiles_relative);
         homeRelative = (RelativeLayout) findViewById(R.id.home_relative);
@@ -237,7 +255,7 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
         s_secondLevels_explore = new ArrayList<>();
         s_secondLevels_explore.add(getString(R.string.mobiles));
         s_secondLevels_explore.add(getString(R.string.accessories));
-        hardwareRelative.setOnClickListener(this);
+        warrantyRelative.setOnClickListener(this);
         extentionsRelative.setOnClickListener(this);
         mobilesRelative.setOnClickListener(this);
         homeRelative.setOnClickListener(this);
@@ -299,10 +317,11 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
 
                     break;
 
-                case HardWareFragment:
+                case WarrantyFragment:
 
-                    RagaListFragment hardwareFragment = RagaListFragment.newInstance("", "", fragmentTag);
-                    tabStacker.replaceFragment(hardwareFragment, null);  // no animation
+                    WarrantyCheckFragment warrantyCheckFragment = new WarrantyCheckFragment(true);
+                    tabStacker.replaceFragment(warrantyCheckFragment, null);  // no animation
+
 
                     break;
 
@@ -329,7 +348,7 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
 
         if (fragmentTag.equals(FragmentTags.MobileFragment)) {
 
-            hardwareRelative.setBackgroundResource(R.drawable.rounded_red_gray);
+            warrantyRelative.setBackgroundResource(R.drawable.rounded_red_gray);
             extentionsRelative.setBackgroundResource(R.drawable.rounded_red_gray);
             mobilesRelative.setBackgroundResource(R.drawable.rounded_red_color);
             homeRelative.setBackgroundResource(R.drawable.rounded_red_gray);
@@ -339,12 +358,12 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
             mobile_icon.setTextColor(Color.parseColor("#ffffff"));
             animateSelection(mobile_icon);
             extentions_icon.setTextColor(Color.parseColor("#ed1c24"));
-            hardware_icon.setTextColor(Color.parseColor("#ed1c24"));
+            warranty_icon.setTextColor(Color.parseColor("#ed1c24"));
             other_icon.setTextColor(Color.parseColor("#ed1c24"));
 
         } else if (fragmentTag.equals(FragmentTags.HomeFragment)) {
 
-            hardwareRelative.setBackgroundResource(R.drawable.rounded_red_gray);
+            warrantyRelative.setBackgroundResource(R.drawable.rounded_red_gray);
             extentionsRelative.setBackgroundResource(R.drawable.rounded_red_gray);
             mobilesRelative.setBackgroundResource(R.drawable.rounded_red_gray);
             homeRelative.setBackgroundResource(R.drawable.rounded_red_color);
@@ -355,12 +374,12 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
             animateSelection(home_icon);
             mobile_icon.setTextColor(Color.parseColor("#ed1c24"));
             extentions_icon.setTextColor(Color.parseColor("#ed1c24"));
-            hardware_icon.setTextColor(Color.parseColor("#ed1c24"));
+            warranty_icon.setTextColor(Color.parseColor("#ed1c24"));
             other_icon.setTextColor(Color.parseColor("#ed1c24"));
 
-        } else if (fragmentTag.equals(FragmentTags.HardWareFragment)) {
+        } else if (fragmentTag.equals(FragmentTags.WarrantyFragment)) {
 
-            hardwareRelative.setBackgroundResource(R.drawable.rounded_red_color);
+            warrantyRelative.setBackgroundResource(R.drawable.rounded_red_color);
             extentionsRelative.setBackgroundResource(R.drawable.rounded_red_gray);
             mobilesRelative.setBackgroundResource(R.drawable.rounded_red_gray);
             homeRelative.setBackgroundResource(R.drawable.rounded_red_gray);
@@ -369,14 +388,14 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
             home_icon.setTextColor(Color.parseColor("#ed1c24"));
             mobile_icon.setTextColor(Color.parseColor("#ed1c24"));
             extentions_icon.setTextColor(Color.parseColor("#ed1c24"));
-            hardware_icon.setTextColor(Color.parseColor("#ffffff"));
-            animateSelection(hardware_icon);
+            warranty_icon.setTextColor(Color.parseColor("#ffffff"));
+            animateSelection(warranty_icon);
             other_icon.setTextColor(Color.parseColor("#ed1c24"));
 
         } else if (fragmentTag.equals(FragmentTags.ExtensionsFragment)) {
 
 
-            hardwareRelative.setBackgroundResource(R.drawable.rounded_red_gray);
+            warrantyRelative.setBackgroundResource(R.drawable.rounded_red_gray);
             extentionsRelative.setBackgroundResource(R.drawable.rounded_red_color);
             mobilesRelative.setBackgroundResource(R.drawable.rounded_red_gray);
             homeRelative.setBackgroundResource(R.drawable.rounded_red_gray);
@@ -386,12 +405,12 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
             mobile_icon.setTextColor(Color.parseColor("#ed1c24"));
             extentions_icon.setTextColor(Color.parseColor("#ffffff"));
             animateSelection(extentions_icon);
-            hardware_icon.setTextColor(Color.parseColor("#ed1c24"));
+            warranty_icon.setTextColor(Color.parseColor("#ed1c24"));
             other_icon.setTextColor(Color.parseColor("#ed1c24"));
 
 
         } else {
-            hardwareRelative.setBackgroundResource(R.drawable.rounded_red_gray);
+            warrantyRelative.setBackgroundResource(R.drawable.rounded_red_gray);
             extentionsRelative.setBackgroundResource(R.drawable.rounded_red_gray);
             mobilesRelative.setBackgroundResource(R.drawable.rounded_red_gray);
             homeRelative.setBackgroundResource(R.drawable.rounded_red_gray);
@@ -400,7 +419,7 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
             home_icon.setTextColor(Color.parseColor("#ed1c24"));
             mobile_icon.setTextColor(Color.parseColor("#ed1c24"));
             extentions_icon.setTextColor(Color.parseColor("#ed1c24"));
-            hardware_icon.setTextColor(Color.parseColor("#ed1c24"));
+            warranty_icon.setTextColor(Color.parseColor("#ed1c24"));
             other_icon.setTextColor(Color.parseColor("#ffffff"));
             animateSelection(other_icon);
         }
@@ -433,9 +452,9 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        if (view == hardwareRelative) {
-            onClickOnTab(FragmentTags.HardWareFragment);
-            ChangeHeaderView(FragmentTags.HardWareFragment);
+        if (view == warrantyRelative) {
+            onClickOnTab(FragmentTags.WarrantyFragment);
+            ChangeHeaderView(FragmentTags.WarrantyFragment);
         } else if (view == extentionsRelative) {
             onClickOnTab(FragmentTags.ExtensionsFragment);
             ChangeHeaderView(FragmentTags.ExtensionsFragment);

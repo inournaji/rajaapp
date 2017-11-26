@@ -7,7 +7,7 @@ public enum FragmentTags {
 
     HomeFragment("HOME_FRAGMENT"),
     MobileFragment("MOBILE"),
-    HardWareFragment("HARDWARE"),
+    WarrantyFragment("Warrenty"),
     OTHERFragment("OTHER"),
     SearchFragment("SEARCH_FRAGMENT"),
     OffersFragment("OFFERS_FRAGMENT"),

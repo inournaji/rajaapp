@@ -89,6 +89,21 @@ public class ScreenUtils {
 
     }
 
+    public static void showCancelableLoader(Context context) {
+
+        loadingDialog = new Dialog(context);
+        loadingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        loadingDialog.setContentView(R.layout.loading_dialog);
+
+        AVLoadingIndicatorView loader = (AVLoadingIndicatorView) loadingDialog.findViewById(R.id.loader_view);
+        loader.show();
+
+        loadingDialog.setCancelable(true);
+        loadingDialog.show();
+
+    }
+
     public static void dismissLoader() {
 
         if (loadingDialog != null) {

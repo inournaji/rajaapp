@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">RajaTec</string>
     <string name="apps">Apps</string>
-    <string name="hardware">Hardware</string>
+    <string name="warrantyActivation">Warranty</string>
     <string name="home">Home</string>
     <string name="mobiles">Mobiles</string>
     <string name="accessories">Accessory</string>
@@ -49,4 +49,7 @@
     <string name="warrantyError">Make sure you entered IMEI code and mobile number.</string>
     <string name="visit">VISIT</string>
     <string name="close">Close</string>
+    <string name="startDate">Start Date:</string>
+    <string name="notificationExtra">Notification</string>
+    <string name="activate">Activate</string>
 </resources>

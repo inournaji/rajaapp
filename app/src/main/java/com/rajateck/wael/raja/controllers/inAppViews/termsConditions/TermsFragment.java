@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.RelativeLayout;
 
 import com.rajateck.wael.raja.R;
 import com.rajateck.wael.raja.controllers.inAppViews.BaseActivity;
 import com.rajateck.wael.raja.enums.FragmentTags;
+import com.rajateck.wael.raja.utils.ScreenUtils;
 
 import fr.arnaudguyon.tabstacker.TabStacker;
 
@@ -43,6 +45,17 @@ public class TermsFragment extends Fragment implements TabStacker.TabStackInterf
         terms_webview.getSettings().setJavaScriptEnabled(true);
         terms_webview.getSettings().setJavaScriptEnabled(true);
         terms_webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        ScreenUtils.showCancelableLoader(getActivity());
+        terms_webview.setWebChromeClient(new WebChromeClient() {
+            public void onProgressChanged(WebView view, int progress) {
+
+                if (progress == 100) {
+                    ScreenUtils.dismissLoader();
+                }
+            }
+        });
+
+
         terms_webview.loadUrl("https://rajatec.net/ar/content/warantypolicy");
 
         close.setOnTouchListener(new View.OnTouchListener() {
