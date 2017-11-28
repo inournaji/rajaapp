@@ -52,4 +52,8 @@
     <string name="startDate">Start Date:</string>
     <string name="notificationExtra">Notification</string>
     <string name="activate">Activate</string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="call">Call</string>
+    <string name="errorLoading">Error happen during getting data</string>
+    <string name="retry">Retry</string>
 </resources>

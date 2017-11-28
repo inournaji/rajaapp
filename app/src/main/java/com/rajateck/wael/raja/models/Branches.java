@@ -37,7 +37,7 @@ public class Branches {
             return;
         }
         address = jsonObject.optString("Address");
-        phonenumber = jsonObject.optString("Phonenumber");
+        phonenumber = jsonObject.optString("Phone number");
         lat = jsonObject.optString("lat");
         longe = jsonObject.optString("longe");
         nid = jsonObject.optString("nid");

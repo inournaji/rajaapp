@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lifeofcoding.cacheutlislibrary.CacheUtils;
 import com.rajateck.wael.raja.models.AccessoryItem;
 import com.rajateck.wael.raja.models.AndroidApplication;
+import com.rajateck.wael.raja.models.Branches;
 import com.rajateck.wael.raja.models.HardWare;
 import com.rajateck.wael.raja.models.Mobile;
 import com.rajateck.wael.raja.models.News;
@@ -169,5 +170,24 @@ public class RajaCacheUtils {
         System.out.println("RajaCacheUtils.cache the warranty item");
 
         CacheUtils.writeObjectFile(CacheFilesName.WarrantyItem.getFileName(), warrentyCheckDetails);
+    }
+
+
+
+
+
+    public static void cacheMapPines(ArrayList<Branches> mapPins) {
+
+        CacheUtils.writeObjectFile(CacheFilesName.MapPinesFileName.getFileName(), mapPins);
+    }
+
+    public static ArrayList<Branches> getCachedMapPines() {
+
+        ArrayList<Branches> cachedSmsList = CacheUtils.readObjectFile(CacheFilesName.MapPinesFileName.getFileName(), new TypeToken<ArrayList<Branches>>() {
+        }.getType());
+        if (cachedSmsList == null) {
+            cachedSmsList = new ArrayList<>();
+        }
+        return cachedSmsList;
     }
 }

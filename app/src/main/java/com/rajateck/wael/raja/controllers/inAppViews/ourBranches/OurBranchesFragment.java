@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -35,6 +37,7 @@ import com.rajateck.wael.raja.delegates.networkDelegates.GetBranchesDelegate;
 import com.rajateck.wael.raja.models.Branches;
 import com.rajateck.wael.raja.utils.GoogleMapUtils;
 import com.rajateck.wael.raja.utils.ScreenUtils;
+import com.rajateck.wael.raja.utils.cacheUtils.RajaCacheUtils;
 import com.rajateck.wael.raja.utils.locationUtils.LocationUtils;
 
 import java.util.ArrayList;
@@ -43,20 +46,23 @@ import fr.arnaudguyon.tabstacker.TabStacker;
 
 
 public class OurBranchesFragment extends Fragment implements TabStacker.TabStackInterface, OnClickListener, OnMapReadyCallback {
-    View inflatedView;
-    GoogleMap googleMap;
-    String[] mPlaceType = null;
-    RelativeLayout googleRel;
-    LocationUtils.LatLang userLatLong;
-    ArrayList<Branches> rajaBranches;
+    private View inflatedView;
+    private GoogleMap googleMap;
+    private String[] mPlaceType = null;
+    private RelativeLayout googleRel;
+    private LocationUtils.LatLang userLatLong;
+    private ArrayList<Branches> rajaBranches;
+    private Snackbar snackbar;
 
     public OurBranchesFragment() {
 
     }
 
+
     public static OurBranchesFragment newInstance(String param1, String param2) {
         return new OurBranchesFragment();
     }
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,12 +71,14 @@ public class OurBranchesFragment extends Fragment implements TabStacker.TabStack
         checkGooglePlayServices();
     }
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.inflatedView = inflater.inflate(R.layout.fragment_map, container, false);
         googleRel = inflatedView.findViewById(R.id.googleRel);
         setRetainInstance(false);
         return this.inflatedView;
     }
+
 
     private void checkGooglePlayServices() {
         try {
@@ -91,11 +99,11 @@ public class OurBranchesFragment extends Fragment implements TabStacker.TabStack
         }
     }
 
+
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.inflatedView = view;
         ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMapAsync(this);
-
     }
 
     @Override
@@ -122,37 +130,6 @@ public class OurBranchesFragment extends Fragment implements TabStacker.TabStack
             ex.printStackTrace();
         }
     }
-
-//    private void addUserMarkerToGoogleMap(String imageUrl, final String containerAssetName) {
-//        new DownloadImageTask(getActivity(), new OnImageDownloaded() {
-//            @Override
-//            public void OnDone(Bitmap bitmap) {
-//                Bitmap firstMarkerBitmap = GoogleMapUtils.resizeMapIconFromAssets(getActivity(),
-//                        containerAssetName,
-//                        (int) ScreenUtils.dpToPx(getActivity(), 23),
-//                        (int) ScreenUtils.dpToPx(getActivity(), 23));
-//
-//                Bitmap resizedBitmap = GoogleMapUtils.resizeMapIcon(getActivity(),
-//                        bitmap,
-//                        (int) ScreenUtils.dpToPx(getActivity(), 41),
-//                        (int) ScreenUtils.dpToPx(getActivity(), 41));
-//
-//                Bitmap combinedBitmaps = GoogleMapUtils.JoinTwoIconsAboveEachOther(getActivity(),
-//                        firstMarkerBitmap,
-//                        resizedBitmap);
-//
-//
-//                if (combinedBitmaps != null) {
-//                    googleMap.addMarker(new MarkerOptions()
-//                            .position(new LatLng(25.096736, 55.157188))
-//                            .title("I am Wael, Nice to meet you")
-//                            .icon(BitmapDescriptorFactory.fromBitmap(combinedBitmaps)));
-//                } else {
-//                    System.out.println("OurBranchesFragment.addUserMarkerToGoogleMap : the bitmap is null");
-//                }
-//            }
-//        }, imageUrl).execute();
-//}
 
     @Override
     public View onSaveTabFragmentInstance(Bundle bundle) {
@@ -192,12 +169,29 @@ public class OurBranchesFragment extends Fragment implements TabStacker.TabStack
                         }
                     }
 
+
                     if (branches != null) {
-                        BranchesPopUpForm branchesPopUpForm = new BranchesPopUpForm(
+
+                        String popupMessage = "";
+
+                        popupMessage = branches.getTitle() +
+                                "\n" + branches.getAddress();
+
+                        Boolean callEnabled = false;
+
+                        if (branches.getPhonenumber() != null && branches.getPhonenumber().length() > 0) {
+                            popupMessage += "\n" + getString(R.string.phoneNumber) + ": " +
+                                    branches.getPhonenumber();
+                            callEnabled = true;
+                        }
+
+
+                        final BranchesPopUpForm branchesPopUpForm = new BranchesPopUpForm(
                                 branches.getTitle(),
-                                branches.getTitle() + "\n" + branches.getAddress(),
+                                popupMessage,
                                 getString(R.string.visit),
                                 getString(R.string.close),
+                                callEnabled,
                                 new BranchesPopUpInterface() {
                                     @Override
                                     public void onPositiveButtonClicked() {
@@ -220,7 +214,19 @@ public class OurBranchesFragment extends Fragment implements TabStacker.TabStack
 
                                     }
                                 });
-                        BranchesPopup.newInstance(getContext(), branchesPopUpForm).show();
+                        if (branches.getPhonenumber() != null &&
+                                branches.getPhonenumber().length() > 0) {
+                            branchesPopUpForm.setPhoneNumber(branches.getPhonenumber());
+                        }
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                BranchesPopup.newInstance(getContext(), branchesPopUpForm).show();
+                            }
+                        }, 1000);
+
                     }
                 }
 
@@ -228,6 +234,7 @@ public class OurBranchesFragment extends Fragment implements TabStacker.TabStack
             }
         });
     }
+
 
     private void getRajaMarkers() {
 
@@ -241,6 +248,7 @@ public class OurBranchesFragment extends Fragment implements TabStacker.TabStack
                 if (rajaBranches == null) {
                     rajaBranches = new ArrayList<>();
                 }
+                RajaCacheUtils.cacheMapPines(rajaBranches);
                 addRajaMarkers(rajaBranches);
             }
 
@@ -248,29 +256,52 @@ public class OurBranchesFragment extends Fragment implements TabStacker.TabStack
             public void GetBranchesFailureDelegate(String error) {
                 System.out.println("OurBranchesFragment.GetBranchesFailureDelegate");
                 ScreenUtils.dismissLoader();
-
+                snackbar = Snackbar
+                        .make(inflatedView, getString(R.string.errorLoading), Snackbar.LENGTH_INDEFINITE)
+                        .setAction(getString(R.string.retry), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                getRajaMarkers();
+                                snackbar.dismiss();
+                            }
+                        });
+                snackbar.show();
             }
 
             @Override
             public void GetBranchesConnectionErrorDelegate() {
                 System.out.println("OurBranchesFragment.GetBranchesConnectionErrorDelegate");
                 ScreenUtils.dismissLoader();
+
+                snackbar = Snackbar
+                        .make(inflatedView, getString(R.string.errorLoading), Snackbar.LENGTH_INDEFINITE)
+                        .setAction(getString(R.string.retry), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                getRajaMarkers();
+                                snackbar.dismiss();
+                            }
+                        });
+                snackbar.show();
             }
         }, getActivity());
     }
 
+
     private void addRajaMarkers(ArrayList<Branches> branches) {
 
         System.out.println("OurBranchesFragment.addRajaMarkers : the number of markers =" + branches.size());
+
+        addMarkerToUserLocation();
 
         for (int i = 0; i < branches.size(); i++) {
             if (branches.get(i).getLat() != null &&
                     branches.get(i).getLat().trim().length() != 0) {
 
                 Bitmap firstMarkerBitmap = GoogleMapUtils.resizeMapIconFromAssets(getActivity(),
-                        "ic_marker",
-                        (int) ScreenUtils.dpToPx(getActivity(), 23),
-                        (int) ScreenUtils.dpToPx(getActivity(), 23));
+                        "marker2",
+                        (int) ScreenUtils.dpToPx(getActivity(), 36),
+                        (int) ScreenUtils.dpToPx(getActivity(), 36));
 
 
                 String rajaLocatoin = "Damascus Location";
@@ -305,7 +336,9 @@ public class OurBranchesFragment extends Fragment implements TabStacker.TabStack
         }
     }
 
+
     private void addMarkerToUserLocation() {
+
         Bitmap firstMarkerBitmap = GoogleMapUtils.resizeMapIconFromAssets(getActivity(),
                 "ic_my_location",
                 (int) ScreenUtils.dpToPx(getActivity(), 23),
@@ -326,6 +359,7 @@ public class OurBranchesFragment extends Fragment implements TabStacker.TabStack
         }
     }
 
+
     private void animateToUserLocation() {
         userLatLong = LocationUtils.getLocationCoordinate(getActivity());
         if (userLatLong != null &&
@@ -337,6 +371,7 @@ public class OurBranchesFragment extends Fragment implements TabStacker.TabStack
 //            animateCameraToDubai();
         }
     }
+
 
     private void animateCameraToDubai() {
         try {
@@ -351,6 +386,7 @@ public class OurBranchesFragment extends Fragment implements TabStacker.TabStack
             ex.printStackTrace();
         }
     }
+
 
     private void animateCameraToThisLocation(LocationUtils.LatLang latLng, boolean defaultLocation) {
         if (latLng != null) {

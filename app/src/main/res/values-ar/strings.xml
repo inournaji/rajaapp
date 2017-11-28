@@ -51,5 +51,9 @@
     <string name="close">أغلق</string>
     <string name="startDate">تاريخ البدء:</string>
     <string name="activate">تفعيل الكفالة</string>
+    <string name="phoneNumber">رقم الهاتف</string>
+    <string name="call">اتصل</string>
+    <string name="errorLoading">حدث خطأ أثناء الحصول على البيانات</string>
+    <string name="retry">إعادة المحاولة</string>
 
 </resources>

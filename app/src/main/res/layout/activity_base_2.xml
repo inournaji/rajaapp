@@ -401,7 +401,7 @@
                     <FrameLayout
                         android:id="@+id/Feedback_frame"
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
+                        android:layout_height="0dp"
                         android:layout_below="@+id/Offers_frame"
                         android:background="#ffffff">
 
@@ -477,7 +477,7 @@
                             android:layout_gravity="start|center_vertical"
                             android:layout_marginStart="21dp"
                             android:background="#ffffff"
-                            android:src="@drawable/ic_customer_reviews" />
+                            android:src="@drawable/ic_marker" />
 
                         <ImageView
                             android:id="@+id/our_braches_selected_icon"

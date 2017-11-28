@@ -106,9 +106,8 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
         check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (warrantyEditText.getText().toString().trim().length() >= 10 &&
-                        mobileEditText.getText().toString().trim().length() > 9) {
-
+                if (warrantyEditText.getText().toString().trim().length() >= 10) {
+                    // &&mobileEditText.getText().toString().trim().length() > 9
                     ScreenUtils.showLoader(getActivity());
                     detailsView.setVisibility(View.GONE);
                     System.out.println("WarrantyCheckFragment.onClick");
@@ -140,6 +139,16 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
 
                                                                    RajaCacheUtils.cacheThisWarrantyCheckData(getActivity(), warrentyCheckDetails);
                                                                    checkCachedData();
+                                                               } else {
+                                                                   System.out.println("WarrantyCheckFragment.activateDeviceDelegateSuccess: here");
+                                                                   if (warrentyCheckDetails != null &&
+                                                                           warrentyCheckDetails.getError() != null) {
+
+                                                                       showErrorMessage(getString(R.string.sorry), warrentyCheckDetails.getError());
+                                                                   } else {
+                                                                       showErrorMessage(getString(R.string.sorry), getString(R.string.connectionError));
+
+                                                                   }
                                                                }
 
                                                            }
@@ -158,7 +167,8 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
                                                                detailsView.setVisibility(View.GONE);
                                                                System.out.println("WarrantyCheckFragment.getWarrantyConnectionErrorDelegate");
                                                                ScreenUtils.dismissLoader();
-                                                               Toast.makeText(getActivity(), "Make sure you entered IMEI code.", Toast.LENGTH_LONG).show();
+                                                               showErrorMessage(getString(R.string.sorry), getString(R.string.connectionError));
+//                                                               Toast.makeText(getActivity(), "Make sure you entered IMEI code.", Toast.LENGTH_LONG).show();
                                                            }
 
                                                            @Override
@@ -173,12 +183,12 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
                             mobileEditText.getText().toString(),
                             getActivity());
                 } else {
-                    if (mobileEditText.getText().toString().trim().length() < 10) {
-                        YoYo.with(Techniques.Shake)
-                                .duration(200)
-                                .playOn(mobileEditText);
-
-                    }
+//                    if (mobileEditText.getText().toString().trim().length() < 10) {
+//                        YoYo.with(Techniques.Shake)
+//                                .duration(200)
+//                                .playOn(mobileEditText);
+//
+//                    }
 
                     if (warrantyEditText.getText().toString().trim().length() < 10) {
                         YoYo.with(Techniques.Shake)

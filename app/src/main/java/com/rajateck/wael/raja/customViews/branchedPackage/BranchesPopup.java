@@ -2,6 +2,8 @@ package com.rajateck.wael.raja.customViews.branchedPackage;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.view.Window;
 import android.widget.RelativeLayout;
@@ -17,6 +19,15 @@ import com.rajateck.wael.raja.R;
 public class BranchesPopup extends Dialog implements View.OnClickListener {
     private Context context;
     private BranchesPopUpForm branchesPopUpForm;
+    private RelativeLayout dialogContent;
+    private TextView branchesTitleTextview;
+    private View seperator;
+    private RelativeLayout popupSecondSection;
+    private TextView branchesDetailsTextview;
+    private View sep;
+    private TextView positiveTextview;
+    private TextView callTextview;
+    private TextView negativeTextview;
 
     public BranchesPopup(Context context) {
         super(context);
@@ -43,25 +54,18 @@ public class BranchesPopup extends Dialog implements View.OnClickListener {
     public BranchesPopUpForm getbranchesPopUpForm() {
         return branchesPopUpForm;
     }
-    private RelativeLayout dialogContent;
-    private TextView branchesTitleTextview;
-    private View seperator;
-    private RelativeLayout popupSecondSection;
-    private TextView branchesDetailsTextview;
-    private View sep;
-    private TextView positiveTextview;
-    private TextView negativeTextview;
-    
+
     private void findViews() {
-        dialogContent = (RelativeLayout)findViewById( R.id.dialog_content );
-        branchesTitleTextview = (TextView)findViewById( R.id.branches_title_textview );
-        seperator = (View)findViewById( R.id.seperator );
-        popupSecondSection = (RelativeLayout)findViewById( R.id.popup_second_section );
-        branchesDetailsTextview = (TextView)findViewById( R.id.branches_details_textview );
-        
-        sep = (View)findViewById( R.id.sep );
-        positiveTextview = (TextView)findViewById( R.id.positive_textview );
-        negativeTextview = (TextView)findViewById( R.id.negative_textview );
+        dialogContent = (RelativeLayout) findViewById(R.id.dialog_content);
+        branchesTitleTextview = (TextView) findViewById(R.id.branches_title_textview);
+        seperator = (View) findViewById(R.id.seperator);
+        popupSecondSection = (RelativeLayout) findViewById(R.id.popup_second_section);
+        branchesDetailsTextview = (TextView) findViewById(R.id.branches_details_textview);
+
+        sep = (View) findViewById(R.id.sep);
+        positiveTextview = findViewById(R.id.positive_textview);
+        negativeTextview = findViewById(R.id.negative_textview);
+        callTextview = findViewById(R.id.call_textview);
     }
 
 
@@ -86,6 +90,7 @@ public class BranchesPopup extends Dialog implements View.OnClickListener {
             String positiveStringIfEnabled = branchesPopUpForm.getPositiveButton();
             String negativeStringIfEnabled = branchesPopUpForm.getNegativeButton();
 
+
             if (title == null) {
                 title = context.getString(R.string.sorry);
             }
@@ -101,6 +106,24 @@ public class BranchesPopup extends Dialog implements View.OnClickListener {
                 positiveTextview.setText(positiveStringIfEnabled);
                 positiveTextview.setOnClickListener(this);
             }
+
+
+            if (branchesPopUpForm != null &&
+                    branchesPopUpForm.getCallEnable() != null &&
+                    branchesPopUpForm.getCallEnable()) {
+                callTextview.setVisibility(View.VISIBLE);
+                callTextview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent dialIntent = new Intent(Intent.ACTION_DIAL);
+                        dialIntent.setData(Uri.parse("tel:" + branchesPopUpForm.getPhoneNumber()));
+                        context.startActivity(dialIntent);
+                    }
+                });
+            } else {
+                callTextview.setVisibility(View.GONE);
+            }
+
 
             if (negativeStringIfEnabled == null) {
                 negativeTextview.setVisibility(View.VISIBLE);

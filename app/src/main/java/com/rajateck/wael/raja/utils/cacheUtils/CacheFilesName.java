@@ -13,7 +13,8 @@ public enum CacheFilesName {
     OffersFileName("OFFERS_LIST"),
     HardWareFile("HARDWARE_LIST"),
     Notification("Notification"),
-    WarrantyItem("WarrantyItem");
+    WarrantyItem("WarrantyItem"),
+    MapPinesFileName("MAPPINS");
 
     private String fileName;
 

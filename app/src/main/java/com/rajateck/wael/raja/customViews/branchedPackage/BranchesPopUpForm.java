@@ -6,26 +6,44 @@ package com.rajateck.wael.raja.customViews.branchedPackage;
  */
 
 public class BranchesPopUpForm {
-    String title;
-    String bodyMessage;
-    String positiveButton;
-    String negativeButton;
-    BranchesPopUpInterface informationPopUpInterface;
+    private String title;
+    private String bodyMessage;
+    private String positiveButton;
+    private Boolean callEnable;
+    private String phoneNumber;
+    private String negativeButton;
+    private BranchesPopUpInterface informationPopUpInterface;
 
-    public BranchesPopUpForm(String title, String bodyMessage, String positiveButton, String negativeButton, BranchesPopUpInterface informationPopUpInterface) {
+    public BranchesPopUpForm(String title, String bodyMessage, String positiveButton, String negativeButton, Boolean callEnable, BranchesPopUpInterface informationPopUpInterface) {
         this.title = title;
         this.bodyMessage = bodyMessage;
         this.positiveButton = positiveButton;
+        this.callEnable = callEnable;
         this.negativeButton = negativeButton;
         this.informationPopUpInterface = informationPopUpInterface;
     }
-
     public BranchesPopUpForm(String title, String bodyMessage, String positiveButton, String negativeButton) {
 
         this.title = title;
         this.bodyMessage = bodyMessage;
         this.positiveButton = positiveButton;
         this.negativeButton = negativeButton;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Boolean getCallEnable() {
+        return callEnable;
+    }
+
+    public void setCallEnable(Boolean callEnable) {
+        this.callEnable = callEnable;
     }
 
     public String getTitle() {
