@@ -305,7 +305,9 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
-                        endDate.setText(String.format("%s  %s", getString(R.string.endDate), warrentyCheckDetails.getEnd_date()));
+                        Toast.makeText(getActivity(), "Exception happened here: " + ex.toString(), Toast.LENGTH_SHORT).show();
+//                        endDate.setText(String.format("%s  %s", getString(R.string.endDate), warrentyCheckDetails.getEnd_date()));
+                        endDate.setText(String.format("%s  %s", getString(R.string.endDate), "Error"));
                     }
 
                 } else {
@@ -315,17 +317,17 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
 
 
                 if (warrentyCheckDetails.getStart_date() != null) {
-                    try {
-                        Calendar calendar = Calendar.getInstance();
-                        SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-                        calendar.setTime(simpleDateFormatter.parse(warrentyCheckDetails.getStart_date()));
-
-                        startDate.setText(String.format("%s  %s", getString(R.string.startDate), simpleDateFormatter.format(calendar.getTime())));
-
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                        startDate.setText(String.format("%s  %s", getString(R.string.startDate), warrentyCheckDetails.getStart_date()));
-                    }
+//                    try {
+//                        Calendar calendar = Calendar.getInstance();
+//                        SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+//                        calendar.setTime(simpleDateFormatter.parse(warrentyCheckDetails.getStart_date()));
+//
+//                        startDate.setText(String.format("%s  %s", getString(R.string.startDate), simpleDateFormatter.format(calendar.getTime())));
+//
+//                    } catch (Exception ex) {
+//                        ex.printStackTrace();
+                    startDate.setText(String.format("%s  %s", getString(R.string.startDate), warrentyCheckDetails.getStart_date().replace("\\", "")));
+//                    }
 
                 } else {
                     startDate.setText("");
