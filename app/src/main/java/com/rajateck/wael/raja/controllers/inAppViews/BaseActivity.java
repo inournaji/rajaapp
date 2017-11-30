@@ -22,6 +22,7 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -93,6 +94,12 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
     private FrameLayout Join_frame;
     private TextView english;
     private TextView arabic;
+    private ImageView other;
+    private ImageView hardware_iv;
+    private ImageView mobile_iv;
+    private ImageView home_iv;
+    private ImageView extensions_iv;
+
 
     public static Intent getOpenFacebookIntent(Context context) {
         try {
@@ -219,6 +226,11 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void findViews() {
+        other = findViewById(R.id.other);
+        hardware_iv = findViewById(R.id.hardware_iv);
+        mobile_iv = findViewById(R.id.mobile_iv);
+        home_iv = findViewById(R.id.home_iv);
+        extensions_iv = findViewById(R.id.extensions_iv);
         Warranty_frame = (FrameLayout) findViewById(R.id.Warranty_frame);
         Offers_frame = (FrameLayout) findViewById(R.id.Offers_frame);
         search_icon_container = (RelativeLayout) findViewById(R.id.search_icon_container);
@@ -354,12 +366,18 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
             homeRelative.setBackgroundResource(R.drawable.rounded_red_gray);
             otherServiceRelative.setBackgroundResource(R.drawable.rounded_red_gray);
 
+            animateSelection(mobile_icon);
             home_icon.setTextColor(Color.parseColor("#ed1c24"));
             mobile_icon.setTextColor(Color.parseColor("#ffffff"));
-            animateSelection(mobile_icon);
             extentions_icon.setTextColor(Color.parseColor("#ed1c24"));
             warranty_icon.setTextColor(Color.parseColor("#ed1c24"));
             other_icon.setTextColor(Color.parseColor("#ed1c24"));
+
+            home_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            mobile_iv.setColorFilter(Color.parseColor("#ffffff"));
+            extensions_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            hardware_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            other.setColorFilter(Color.parseColor("#ed1c24"));
 
         } else if (fragmentTag.equals(FragmentTags.HomeFragment)) {
 
@@ -377,6 +395,12 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
             warranty_icon.setTextColor(Color.parseColor("#ed1c24"));
             other_icon.setTextColor(Color.parseColor("#ed1c24"));
 
+            home_iv.setColorFilter(Color.parseColor("#ffffff"));
+            mobile_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            extensions_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            hardware_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            other.setColorFilter(Color.parseColor("#ed1c24"));
+
         } else if (fragmentTag.equals(FragmentTags.WarrantyFragment)) {
 
             warrantyRelative.setBackgroundResource(R.drawable.rounded_red_color);
@@ -391,6 +415,12 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
             warranty_icon.setTextColor(Color.parseColor("#ffffff"));
             animateSelection(warranty_icon);
             other_icon.setTextColor(Color.parseColor("#ed1c24"));
+
+            home_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            mobile_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            extensions_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            hardware_iv.setColorFilter(Color.parseColor("#ffffff"));
+            other.setColorFilter(Color.parseColor("#ed1c24"));
 
         } else if (fragmentTag.equals(FragmentTags.ExtensionsFragment)) {
 
@@ -409,6 +439,12 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
             other_icon.setTextColor(Color.parseColor("#ed1c24"));
 
 
+            home_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            mobile_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            extensions_iv.setColorFilter(Color.parseColor("#ffffff"));
+            hardware_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            other.setColorFilter(Color.parseColor("#ed1c24"));
+
         } else {
             warrantyRelative.setBackgroundResource(R.drawable.rounded_red_gray);
             extentionsRelative.setBackgroundResource(R.drawable.rounded_red_gray);
@@ -422,6 +458,12 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
             warranty_icon.setTextColor(Color.parseColor("#ed1c24"));
             other_icon.setTextColor(Color.parseColor("#ffffff"));
             animateSelection(other_icon);
+
+            home_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            mobile_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            extensions_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            hardware_iv.setColorFilter(Color.parseColor("#ed1c24"));
+            other.setColorFilter(Color.parseColor("#ffffff"));
         }
     }
 

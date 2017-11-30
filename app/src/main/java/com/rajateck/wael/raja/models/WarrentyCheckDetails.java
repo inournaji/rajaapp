@@ -32,6 +32,7 @@ public class WarrentyCheckDetails {
         mobile = jsonObject.optString("mobile");
         model = jsonObject.optString("model");
         error = jsonObject.optString("error");
+
     }
 
     public String getError() {

@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daimajia.numberprogressbar.NumberProgressBar;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.rajateck.wael.raja.R;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
@@ -22,14 +23,31 @@ public class RagaListItem extends RecyclerView.ViewHolder {
     private NumberProgressBar app_progress;
     private TextView download;
     private TextView created_date;
+    private TextView version;
+    private TextView size;
+    private ImageView stop_downloading;
+    private ImageView icon_holder;
+
+    public RagaListItem(View view) {
+        super(view);
+        this.icon = (ImageView) view.findViewById(R.id.icon);
+        this.oldPricel = (TextView) view.findViewById(R.id.price);
+        this.itemName = (TextView) view.findViewById(R.id.cat_name);
+        this.icon_video = (JCVideoPlayerStandard) view.findViewById(R.id.icon_video);
+        this.app_progress = (NumberProgressBar) view.findViewById(R.id.app_progress);
+        this.download = (TextView) view.findViewById(R.id.download);
+        this.play_image_view = (ImageView) view.findViewById(R.id.play_image_view);
+        this.version = (TextView) view.findViewById(R.id.version);
+        this.size = (TextView) view.findViewById(R.id.size);
+        this.created_date = (TextView) view.findViewById(R.id.created_date);
+        this.icon_holder = (ImageView) view.findViewById(R.id.icon_holder);
+        this.stop_downloading = (ImageView) view.findViewById(R.id.stop_downloading);
+    }
+
 
     public ImageView getStop_downloading() {
         return stop_downloading;
     }
-
-    private TextView version;
-    private TextView size;
-    private ImageView stop_downloading;
 
     public ImageView getIcon_holder() {
         return icon_holder;
@@ -38,9 +56,6 @@ public class RagaListItem extends RecyclerView.ViewHolder {
     public void setIcon_holder(ImageView icon_holder) {
         this.icon_holder = icon_holder;
     }
-
-    private ImageView icon_holder;
-
 
     public TextView getVersion() {
         return version;
@@ -56,23 +71,6 @@ public class RagaListItem extends RecyclerView.ViewHolder {
 
     public void setSize(TextView size) {
         this.size = size;
-    }
-
-    public RagaListItem(View view) {
-        super(view);
-        this.icon = (ImageView) view.findViewById(R.id.icon);
-
-        this.oldPricel = (TextView) view.findViewById(R.id.price);
-        this.itemName = (TextView) view.findViewById(R.id.cat_name);
-        this.icon_video = (JCVideoPlayerStandard) view.findViewById(R.id.icon_video);
-        this.app_progress = (NumberProgressBar) view.findViewById(R.id.app_progress);
-        this.download = (TextView) view.findViewById(R.id.download);
-        this.play_image_view = (ImageView) view.findViewById(R.id.play_image_view);
-        this.version = (TextView) view.findViewById(R.id.version);
-        this.size = (TextView) view.findViewById(R.id.size );
-        this.created_date = (TextView) view.findViewById(R.id.created_date);
-        this.icon_holder = (ImageView) view.findViewById(R.id.icon_holder);
-        this.stop_downloading = (ImageView) view.findViewById(R.id.stop_downloading);
     }
 
     public TextView getDownload() {

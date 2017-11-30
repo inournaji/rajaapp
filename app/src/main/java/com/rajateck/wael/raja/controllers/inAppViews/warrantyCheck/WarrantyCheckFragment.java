@@ -31,6 +31,10 @@ import com.rajateck.wael.raja.utils.CheckPermissionUtils;
 import com.rajateck.wael.raja.utils.ScreenUtils;
 import com.rajateck.wael.raja.utils.cacheUtils.RajaCacheUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 import fr.arnaudguyon.tabstacker.TabStacker;
 
 public class WarrantyCheckFragment extends Fragment implements TabStacker.TabStackInterface {
@@ -290,7 +294,20 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
                 }
 
                 if (warrentyCheckDetails.getEnd_date() != null) {
-                    endDate.setText(getString(R.string.endDate) + "  " + warrentyCheckDetails.getEnd_date());
+//                    Toast.makeText(getActivity(), warrentyCheckDetails.getEnd_date(), Toast.LENGTH_SHORT).show();
+
+                    try {
+                        Calendar calendar = Calendar.getInstance();
+                        SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                        calendar.setTime(simpleDateFormatter.parse(warrentyCheckDetails.getEnd_date()));
+
+                        endDate.setText(String.format("%s  %s", getString(R.string.endDate), simpleDateFormatter.format(calendar.getTime())));
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        endDate.setText(String.format("%s  %s", getString(R.string.endDate), warrentyCheckDetails.getEnd_date()));
+                    }
+
                 } else {
                     endDate.setText("");
                     endDate.setVisibility(View.GONE);
@@ -298,12 +315,24 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
 
 
                 if (warrentyCheckDetails.getStart_date() != null) {
-                    startDate.setText(getString(R.string.startDate) + "  " + warrentyCheckDetails.getStart_date());
+                    try {
+                        Calendar calendar = Calendar.getInstance();
+                        SimpleDateFormat simpleDateFormatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                        calendar.setTime(simpleDateFormatter.parse(warrentyCheckDetails.getStart_date()));
+
+                        startDate.setText(String.format("%s  %s", getString(R.string.startDate), simpleDateFormatter.format(calendar.getTime())));
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        startDate.setText(String.format("%s  %s", getString(R.string.startDate), warrentyCheckDetails.getStart_date()));
+                    }
+
                 } else {
                     startDate.setText("");
                     startDate.setVisibility(View.GONE);
                 }
                 if (warrentyCheckDetails.getNotes() != null &&
+                        !warrentyCheckDetails.getNotes().trim().equalsIgnoreCase("null") &&
                         warrentyCheckDetails.getNotes().trim().length() != 0) {
                     note.setText(getString(R.string.noteString) + "  " + warrentyCheckDetails.getNotes());
                 } else {

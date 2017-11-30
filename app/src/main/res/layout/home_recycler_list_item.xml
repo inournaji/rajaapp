@@ -44,13 +44,28 @@
                         android:src="@drawable/news_placeholder"
                         android:visibility="gone" />
 
+                    <!--<com.facebook.shimmer.ShimmerFrameLayout-->
+                        <!--android:id="@+id/shimmerLayout"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent">-->
+
+                        <!--<ImageView-->
+                            <!--android:id="@+id/belowView"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_centerHorizontal="true"-->
+                            <!--android:background="#eeeeee"-->
+                            <!--android:scaleType="fitXY" />-->
+
+                    <!--</com.facebook.shimmer.ShimmerFrameLayout>-->
+
+
 
                     <ImageView
                         android:id="@+id/icon"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_centerHorizontal="true"
-                        android:background="#eeeeee"
                         android:scaleType="fitXY" />
 
                     <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard

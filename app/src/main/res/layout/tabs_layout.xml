@@ -15,18 +15,30 @@
         android:layout_weight="1"
         android:background="@drawable/rounded_red_gray">
 
+        <ImageView
+            android:id="@+id/other"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_apps"
+            android:tint="@color/app_red_color" />
+
+
+
         <TextView
             android:id="@+id/other_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_below="@+id/other"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
             android:gravity="center"
-            android:typeface="serif"
             android:text="@string/apps"
-            android:textColor="@color/app_red_color" />
+            android:textColor="@color/app_red_color"
+            android:typeface="serif" />
 
     </RelativeLayout>
-
 
     <RelativeLayout
         android:id="@+id/extentions_relative"
@@ -35,58 +47,99 @@
         android:layout_weight="1"
         android:background="@drawable/rounded_red_gray">
 
+
+        <ImageView
+            android:id="@+id/extensions_iv"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/mobile_extensions"
+            android:tint="@color/app_red_color" />
+
+
         <TextView
             android:id="@+id/extentions_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_below="@+id/extensions_iv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
             android:gravity="center"
-            android:typeface="serif"
             android:text="@string/accessories"
-            android:textColor="@color/app_red_color" />
+            android:textColor="@color/app_red_color"
+            android:typeface="serif" />
 
     </RelativeLayout>
-
 
     <RelativeLayout
         android:id="@+id/home_relative"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@drawable/rounded_red_color">
+        android:background="@drawable/rounded_red_color"
+        android:gravity="center">
+
+
+        <ImageView
+            android:id="@+id/home_iv"
+            android:layout_width="18dp"
+            android:layout_height="15dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_home"
+            android:tint="#ffffff" />
+
 
         <TextView
             android:id="@+id/home_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/home_iv"
+            android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
             android:gravity="center"
-            android:typeface="serif"
             android:text="@string/home"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:typeface="serif" />
 
     </RelativeLayout>
-    <!--ed1c24-->
+
     <RelativeLayout
         android:id="@+id/mobiles_relative"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:layout_weight="1"
         android:background="@drawable/rounded_red_gray">
+
+
+
+        <ImageView
+            android:id="@+id/mobile_iv"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_mobile"
+            android:tint="@color/app_red_color" />
+
 
         <TextView
             android:id="@+id/mobile_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_below="@+id/mobile_iv"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:typeface="serif"
+            android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="@string/mobiles"
-            android:textColor="@color/app_red_color" />
+            android:textColor="@color/app_red_color"
+            android:typeface="serif" />
 
     </RelativeLayout>
-
 
 
     <RelativeLayout
@@ -94,17 +147,30 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@drawable/rounded_red_gray">
+        android:background="@drawable/rounded_red_gray"
+        android:gravity="center">
+
+
+        <ImageView
+            android:id="@+id/hardware_iv"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_checked"
+            android:tint="@color/app_red_color" />
 
         <TextView
             android:id="@+id/hardware_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_below="@+id/hardware_iv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
             android:gravity="center"
-            android:typeface="serif"
             android:text="@string/warrantyActivation"
-            android:textColor="@color/app_red_color" />
+            android:textColor="@color/app_red_color"
+            android:typeface="serif" />
 
     </RelativeLayout>
 

@@ -69,6 +69,8 @@ dependencies {
     compile 'com.google.firebase:firebase-crash:11.2.2'
     compile 'com.google.android.gms:play-services:11.2.2'
     compile 'com.android.support:multidex:1.0.1'
+    compile 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
     testCompile 'junit:junit:4.12'
 }
 

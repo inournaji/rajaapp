@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.rajateck.wael.raja.R;
 import com.rajateck.wael.raja.controllers.inAppViews.rajaList.RagaListItem;
 import com.rajateck.wael.raja.models.News;
+import com.rajateck.wael.raja.utils.ScreenUtils;
 
 import java.util.ArrayList;
 
@@ -57,16 +58,8 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         RecyclerView.ViewHolder viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
-//        if (viewType == ViewType.PhotoViewType.getValue()) {
         View view = inflater.inflate(R.layout.home_recycler_list_item, parent, false);
-        viewHolder = new RagaListItem(view);
-//
-//        } else {
-//            View view = inflater.inflate(R.layout.home_recycler_list_video_item, parent, false);
-//            viewHolder = new RagaListItem(view);
-//
-//        }
-
+        viewHolder = new HomeListItem(view);
 
         return viewHolder;
     }
@@ -74,7 +67,6 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         fillItemData(holder, position);
-
     }
 
     @Override
@@ -83,56 +75,19 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (newsArrayList.get(position).getVideo() != null &&
                     newsArrayList.get(position).getVideo().trim().length() > 0 &&
                     !newsArrayList.get(position).getVideo().equalsIgnoreCase("[]")) {
-//                System.out.println("HomeListAdapter.getItemViewType : Video type");
-//                System.out.println("HomeListAdapter.getItemViewType, the video =  " + newsArrayList.get(position).getVideo());
                 return ViewType.VideoViewType.getValue();
             } else {
-//                System.out.println("HomeListAdapter.getItemViewType : Video photo");
                 return ViewType.PhotoViewType.getValue();
             }
 
         } else {
-//            System.out.println("HomeListAdapter.getItemViewType : Video Default");
             return super.getItemViewType(position);
         }
     }
 
 
     private void fillItemData(final RecyclerView.ViewHolder holder, int position) {
-        holder.setIsRecyclable(false);
-
-        if (holder.getItemViewType() == ViewType.VideoViewType.getValue()) {
-            System.out.println("HomeListAdapter.fillItemData here is the video");
-//            ((RagaListItem) holder).getItemName().setText(newsArrayList.get(position).getTitle());
-//
-//            try {
-//                Glide.with(context)
-//                        .load(newsArrayList.get(position).getImage())
-//                        .placeholder(R.drawable.news_placeholder)
-//                        .into(((RagaListItem) holder).getIcon_video().thumbImageView);
-//            } catch (Exception ex) {
-//                ex.printStackTrace();
-//            }
-
-            System.out.println("HomeListAdapter.fillItemData here is the photo");
-            ((RagaListItem) holder).getItemName().setText(newsArrayList.get(position).getTitle());
-            Glide.with(context)
-                    .load(newsArrayList.get(position).getImage())
-                    .fitCenter()
-
-                    .into(((RagaListItem) holder).getIcon());
-
-            ((RagaListItem) holder).getPlay_image_view().setVisibility(View.VISIBLE);
-
-        } else {
-            System.out.println("HomeListAdapter.fillItemData here is the photo");
-            ((RagaListItem) holder).getItemName().setText(newsArrayList.get(position).getTitle());
-            Glide.with(context)
-                    .load(newsArrayList.get(position).getImage())
-                    .fitCenter()
-                    .into(((RagaListItem) holder).getIcon());
-        }
-
+        ((HomeListItem) holder).onBind (newsArrayList.get(position), context, holder.getItemViewType());
     }
 
     @Override
@@ -145,7 +100,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
 
-    private enum ViewType {
+    public enum ViewType {
         PhotoViewType(0),
         VideoViewType(1);
 
