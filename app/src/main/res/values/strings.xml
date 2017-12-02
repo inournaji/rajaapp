@@ -32,7 +32,7 @@
     <string name="cannotBeEmpty">Cannot be empty</string>
     <string name="sorry">Sorry!</string>
     <string name="pleaseWaitTillTheOtherIsStaring">There is other app in download progress, please wait or till the old one is finished or stop the download.</string>
-    <string name="pendding">Pendding . . .</string>
+    <string name="pendding">Pending . . .</string>
     <string name="resume">Resume</string>
     <string name="Download">download</string>
     <string name="our_braches">Our Branches</string>
@@ -56,4 +56,8 @@
     <string name="call">Call</string>
     <string name="errorLoading">Error happen during getting data</string>
     <string name="retry">Retry</string>
+    <string name="versionIsOutDated">Your Version is Out Dated</string>
+    <string name="yourVerionsIsExpiredPlease">In order to use raja tec app, please upgrade to the latest release, please click the download button or update it from google play store.</string>
+    <string name="download">Download</string>
+    <string name="closeTheApp">Close</string>
 </resources>

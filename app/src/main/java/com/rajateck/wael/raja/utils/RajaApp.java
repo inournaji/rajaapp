@@ -24,6 +24,7 @@ import java.util.Locale;
 public class RajaApp extends Application {
     private final static String TAG = "FileDownloadApplication";
     public static Context CONTEXT;
+    public static int currentVersion = 5;
 
     public static void setLocale(Context context, String local) {
         Locale locale = new Locale(local);

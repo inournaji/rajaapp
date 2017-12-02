@@ -19,6 +19,15 @@ public class News {
     private String title;
     private String Video;
     private Boolean max_width;
+    private String minVersionCode;
+
+    public String getMinVersionCode() {
+        return minVersionCode;
+    }
+
+    public void setMinVersionCode(String minVersionCode) {
+        this.minVersionCode = minVersionCode;
+    }
 
     public Boolean getMax_width() {
         return max_width;
@@ -41,6 +50,7 @@ public class News {
         title = jsonObject.optString("Title");
         Video = jsonObject.optString("Video");
         max_width = jsonObject.optBoolean("fixed_width");
+        minVersionCode = jsonObject.optString("android_min_version");
     }
 
     public static ArrayList<News> getNewsList(JSONArray jsonArray) {

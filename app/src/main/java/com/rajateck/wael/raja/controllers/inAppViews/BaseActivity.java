@@ -1,6 +1,7 @@
 package com.rajateck.wael.raja.controllers.inAppViews;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -490,6 +492,48 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
             }
         }).start();
 
+    }
+
+
+    public void showBlockerPopup() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.this);
+
+        builder.setTitle(getString(R.string.versionIsOutDated));
+        builder.setMessage(getString(R.string.yourVerionsIsExpiredPlease));
+        builder.setPositiveButton(getString(R.string.download), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    System.out.println("BaseActivity.onClick");
+                    String url = "http://kafala.online/";
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            BaseActivity.this.finish();
+                        }
+                    }, 500);
+                } catch (Exception ex) {
+                    Toast.makeText(BaseActivity.this, "Something wrong.", Toast.LENGTH_SHORT).show();
+                    BaseActivity.this.finish();
+                    ex.printStackTrace();
+                }
+            }
+        });
+        builder.setNegativeButton(getString(R.string.closeTheApp), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                System.out.println("BaseActivity.onClick");
+                BaseActivity.this.finish();
+            }
+        });
+        builder.setCancelable(false);
+
+        builder.show();
     }
 
     @Override

@@ -55,5 +55,9 @@
     <string name="call">اتصل</string>
     <string name="errorLoading">حدث خطأ أثناء الحصول على البيانات</string>
     <string name="retry">إعادة المحاولة</string>
+    <string name="versionIsOutDated">نسخة رجا تيك بحاجة للترقية</string>
+    <string name="yourVerionsIsExpiredPlease">من أجل استخدام تطبيق رجا تيك، يرجى الترقية إلى الإصدار الأخير،  انقر على زر التحميل أو قم بتحديثه من متجر غوغل بلاي</string>
+    <string name="download">تحميل</string>
+    <string name="closeTheApp">أغلق</string>
 
 </resources>

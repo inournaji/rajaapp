@@ -20,6 +20,7 @@ import com.rajateck.wael.raja.customViews.ViewVideo;
 import com.rajateck.wael.raja.delegates.networkDelegates.GetNewsListDelegate;
 import com.rajateck.wael.raja.models.News;
 import com.rajateck.wael.raja.utils.ItemClickSupport;
+import com.rajateck.wael.raja.utils.RajaApp;
 import com.rajateck.wael.raja.utils.cacheUtils.RajaCacheUtils;
 
 import java.util.ArrayList;
@@ -35,7 +36,6 @@ public class HomeFragment extends Fragment implements TabStacker.TabStackInterfa
     private RelativeLayout loader;
     private TextView tap_to_retry;
 
-    //    tsh07yiP0iUKVXiRXlf5JDFzjii7UU6Ti2akKQ==
 
     public HomeFragment() {
 
@@ -106,10 +106,9 @@ public class HomeFragment extends Fragment implements TabStacker.TabStackInterfa
                 @Override
                 public void getNewsListSuccessDelegate(ArrayList<News> news, Boolean success) {
                     System.out.println("HomeFragment.getNewsListSuccessDelegate : here");
-
                     tap_to_retry.setVisibility(View.GONE);
                     loader.setVisibility(View.GONE);
-
+                    checkVersionBlockingService(news);
                     if (news != null && news.size() > 0) {
                         RajaCacheUtils.cacheNewsList(news);
                         HomeFragment.this.news = news;
@@ -178,6 +177,32 @@ public class HomeFragment extends Fragment implements TabStacker.TabStackInterfa
             });
         }
     }
+
+    private void checkVersionBlockingService(ArrayList<News> news) {
+        if (news != null &&
+                news.size() > 0 &&
+                news.get(0) != null &&
+                news.get(0).getMinVersionCode() != null) {
+            try {
+                Integer minVersion = Integer.valueOf(news.get(0).getMinVersionCode());
+                if (RajaApp.currentVersion < minVersion) {
+                    System.out.println("HomeFragment.checkVersionBlockingService : here to update it");
+                    ((BaseActivity) getActivity()).showBlockerPopup();
+                } else {
+                    System.out.println("HomeFragment.checkVersionBlockingService : the version is good");
+                }
+
+            } catch (Exception ex) {
+                System.out.println("HomeFragment.checkVersionBlockingService : Exception");
+
+                ex.printStackTrace();
+            }
+        } else {
+            System.out.println("HomeFragment.checkVersionBlockingService : some thing is null");
+        }
+    }
+
+
 
     private void fillHomeListData(ArrayList<News> news) {
         linearLayoutManager = new LinearLayoutManager(getActivity());
