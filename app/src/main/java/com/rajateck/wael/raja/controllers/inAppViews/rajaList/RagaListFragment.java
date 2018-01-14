@@ -3,9 +3,11 @@ package com.rajateck.wael.raja.controllers.inAppViews.rajaList;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,6 +32,7 @@ import com.rajateck.wael.raja.models.ApplicationItem;
 import com.rajateck.wael.raja.models.HardWare;
 import com.rajateck.wael.raja.models.Mobile;
 import com.rajateck.wael.raja.utils.ItemClickSupport;
+import com.rajateck.wael.raja.utils.ScreenUtils;
 import com.rajateck.wael.raja.utils.cacheUtils.RajaCacheUtils;
 
 import java.text.SimpleDateFormat;
@@ -39,7 +42,8 @@ import java.util.Locale;
 
 import fr.arnaudguyon.tabstacker.TabStacker;
 
-public class RagaListFragment extends Fragment implements TabStacker.TabStackInterface {
+public class RagaListFragment extends Fragment implements TabStacker.TabStackInterface, View.OnClickListener {
+    RelativeLayout filterLayout;
     private ArrayList<ApplicationItem> _applicationItemList;
     private List<ApplicationInfo> applicationsInfos;
     private View inflatedView;
@@ -48,11 +52,18 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
     private RelativeLayout loader;
     private TextView tap_to_retry;
     private ArrayList<Mobile> mobilesList;
+    private ArrayList<Mobile> filteredMobilesList;
     private ArrayList<AccessoryItem> accessoryList;
     private ArrayList<HardWare> hardWaresList;
     private ArrayList<AndroidApplication> androidApplicationsList;
     private RecyclerRefreshLayout refresh_layout;
     private TextView lastupdate;
+    private CardView allCard;
+    private CardView iphoneCard;
+    private CardView samsungCard;
+    private CardView sonyCard;
+    private CardView htcCard;
+    private CardView lgCard;
 
     public RagaListFragment() {
         // Required empty public constructor
@@ -73,6 +84,20 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
         listRecycler = (RecyclerView) rootView.findViewById(R.id.list_recycler);
         refresh_layout = (RecyclerRefreshLayout) rootView.findViewById(R.id.refresh_layout);
         lastupdate = (TextView) rootView.findViewById(R.id.lastupdate);
+        filterLayout = rootView.findViewById(R.id.filterLayout);
+        allCard = (CardView) rootView.findViewById(R.id.allCard);
+        iphoneCard = (CardView) rootView.findViewById(R.id.iphoneCard);
+        samsungCard = (CardView) rootView.findViewById(R.id.samsungCard);
+        sonyCard = (CardView) rootView.findViewById(R.id.sonyCard);
+        htcCard = (CardView) rootView.findViewById(R.id.htcCard);
+        lgCard = (CardView) rootView.findViewById(R.id.lgCard);
+
+        allCard.setOnClickListener(this);
+        iphoneCard.setOnClickListener(this);
+        samsungCard.setOnClickListener(this);
+        sonyCard.setOnClickListener(this);
+        htcCard.setOnClickListener(this);
+        lgCard.setOnClickListener(this);
     }
 
     @Override
@@ -121,7 +146,7 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
         }
 
         if (selectedFragmentTag.equals(FragmentTags.MobileFragment)) {
-
+            filterLayout.getLayoutParams().height = (int) ScreenUtils.dpToPx(getActivity(), 60);
 
             ArrayList<Mobile> cachedMobileList = RajaCacheUtils.getCachedMobilesList();
             if (cachedMobileList != null &&
@@ -129,7 +154,36 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
                 mobilesList = cachedMobileList;
             }
 
-            if (mobilesList != null) {
+
+            if (filteredMobilesList != null) {
+                lastupdate.setVisibility(View.VISIBLE);
+
+                System.out.println("RagaListFragment.setUpRecyclerData");
+
+                gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+                listRecycler.setLayoutManager(gridLayoutManager);
+
+                RajaListAdapter rajaListAdapter = new RajaListAdapter(getActivity(), filteredMobilesList, getActivity());
+                listRecycler.setAdapter(rajaListAdapter);
+
+                listRecycler.setRecyclerListener(new RecyclerView.RecyclerListener() {
+                    @Override
+                    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+                        if (selectedFragmentTag.equals(FragmentTags.MobileFragment)) {
+                            ((MobileViewHolder) holder).onbind(null, getActivity());
+                        }
+                    }
+                });
+
+                implementItemClickListener();
+                tap_to_retry.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setUpRecyclerData();
+                    }
+                });
+
+            } else if (mobilesList != null) {
                 lastupdate.setVisibility(View.VISIBLE);
                 try {
                     if (mobilesList.size() > 0) {
@@ -699,7 +753,15 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
         ItemClickSupport.addTo(listRecycler).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                ((BaseActivity) getActivity()).addMobileDetails(mobilesList.get(position));
+                if (filteredMobilesList != null) {
+                    try {
+                        ((BaseActivity) getActivity()).addMobileDetails(filteredMobilesList.get(position));
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    ((BaseActivity) getActivity()).addMobileDetails(mobilesList.get(position));
+                }
             }
         });
     }
@@ -711,7 +773,7 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
 
     @Override
     public void onTabFragmentDismissed(TabStacker.DismissReason dismissReason) {
-
+        filteredMobilesList = null;
     }
 
     @Override
@@ -752,5 +814,119 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
 //        String label = (String)pm.getApplicationLabel(app);
 //        Drawable icon = pm.getApplicationIcon(app);
         return installedApps;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == allCard) {
+            filterMobilesOn(null);
+        } else if (v == iphoneCard) {
+            filterMobilesOn("iphone");
+
+        } else if (v == samsungCard) {
+            filterMobilesOn("samsung");
+
+        } else if (v == sonyCard) {
+            filterMobilesOn("sony");
+
+        } else if (v == htcCard) {
+            filterMobilesOn("htc");
+
+        } else if (v == lgCard) {
+            filterMobilesOn("lg");
+
+        }
+    }
+
+    private void filterMobilesOn(String type) {
+        if (mobilesList == null) {
+            return;
+        }
+        if (type == null) {
+            filteredMobilesList = null;
+            updateListFor(mobilesList);
+            allCard.setCardBackgroundColor(Color.parseColor("#ee3c34"));
+            iphoneCard.setCardBackgroundColor(Color.WHITE);
+            samsungCard.setCardBackgroundColor(Color.WHITE);
+            htcCard.setCardBackgroundColor(Color.WHITE);
+            sonyCard.setCardBackgroundColor(Color.WHITE);
+            lgCard.setCardBackgroundColor(Color.WHITE);
+        } else if (type.equalsIgnoreCase("iphone")) {
+            filteredMobilesList = new ArrayList<>();
+            for (int i = 0; i < mobilesList.size(); i++) {
+                if (mobilesList.get(i).getCompany().toLowerCase().contains("apple")) {
+                    filteredMobilesList.add(mobilesList.get(i));
+                }
+            }
+
+            updateListFor(filteredMobilesList);
+            allCard.setCardBackgroundColor(Color.WHITE);
+            iphoneCard.setCardBackgroundColor(Color.parseColor("#ee3c34"));
+            samsungCard.setCardBackgroundColor(Color.WHITE);
+            htcCard.setCardBackgroundColor(Color.WHITE);
+            sonyCard.setCardBackgroundColor(Color.WHITE);
+            lgCard.setCardBackgroundColor(Color.WHITE);
+        } else if (type.equalsIgnoreCase("samsung")) {
+            filteredMobilesList = new ArrayList<>();
+            for (int i = 0; i < mobilesList.size(); i++) {
+                if (mobilesList.get(i).getCompany().toLowerCase().contains("samsung")) {
+                    filteredMobilesList.add(mobilesList.get(i));
+                }
+            }
+            updateListFor(filteredMobilesList);
+            allCard.setCardBackgroundColor(Color.WHITE);
+            iphoneCard.setCardBackgroundColor(Color.WHITE);
+            samsungCard.setCardBackgroundColor(Color.parseColor("#ee3c34"));
+            htcCard.setCardBackgroundColor(Color.WHITE);
+            sonyCard.setCardBackgroundColor(Color.WHITE);
+            lgCard.setCardBackgroundColor(Color.WHITE);
+        } else if (type.equalsIgnoreCase("sony")) {
+            filteredMobilesList = new ArrayList<>();
+            for (int i = 0; i < mobilesList.size(); i++) {
+                if (mobilesList.get(i).getCompany().toLowerCase().contains("sony")) {
+                    filteredMobilesList.add(mobilesList.get(i));
+                }
+            }
+            updateListFor(filteredMobilesList);
+            allCard.setCardBackgroundColor(Color.WHITE);
+            iphoneCard.setCardBackgroundColor(Color.WHITE);
+            samsungCard.setCardBackgroundColor(Color.WHITE);
+            htcCard.setCardBackgroundColor(Color.WHITE);
+            sonyCard.setCardBackgroundColor(Color.parseColor("#ee3c34"));
+            lgCard.setCardBackgroundColor(Color.WHITE);
+        } else if (type.equalsIgnoreCase("htc")) {
+            filteredMobilesList = new ArrayList<>();
+            for (int i = 0; i < mobilesList.size(); i++) {
+                if (mobilesList.get(i).getCompany().toLowerCase().contains("htc")) {
+                    filteredMobilesList.add(mobilesList.get(i));
+                }
+            }
+            updateListFor(filteredMobilesList);
+            allCard.setCardBackgroundColor(Color.WHITE);
+            iphoneCard.setCardBackgroundColor(Color.WHITE);
+            samsungCard.setCardBackgroundColor(Color.WHITE);
+            htcCard.setCardBackgroundColor(Color.parseColor("#ee3c34"));
+            sonyCard.setCardBackgroundColor(Color.WHITE);
+            lgCard.setCardBackgroundColor(Color.WHITE);
+        } else if (type.equalsIgnoreCase("lg")) {
+            filteredMobilesList = new ArrayList<>();
+            for (int i = 0; i < mobilesList.size(); i++) {
+                if (mobilesList.get(i).getCompany().toLowerCase().contains("lg")) {
+                    filteredMobilesList.add(mobilesList.get(i));
+                }
+            }
+
+            updateListFor(filteredMobilesList);
+            allCard.setCardBackgroundColor(Color.WHITE);
+            iphoneCard.setCardBackgroundColor(Color.WHITE);
+            samsungCard.setCardBackgroundColor(Color.WHITE);
+            htcCard.setCardBackgroundColor(Color.WHITE);
+            sonyCard.setCardBackgroundColor(Color.WHITE);
+            lgCard.setCardBackgroundColor(Color.parseColor("#ee3c34"));
+        }
+    }
+
+    private void updateListFor(ArrayList<Mobile> filteredMobilesList) {
+        setUpRecyclerData();
     }
 }

@@ -31,10 +31,6 @@ import com.rajateck.wael.raja.utils.CheckPermissionUtils;
 import com.rajateck.wael.raja.utils.ScreenUtils;
 import com.rajateck.wael.raja.utils.cacheUtils.RajaCacheUtils;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
 import fr.arnaudguyon.tabstacker.TabStacker;
 
 public class WarrantyCheckFragment extends Fragment implements TabStacker.TabStackInterface {
@@ -142,7 +138,7 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
 
 
                                                                    RajaCacheUtils.cacheThisWarrantyCheckData(getActivity(), warrentyCheckDetails);
-                                                                   checkCachedData();
+                                                                   checkCachedData(false);
                                                                } else {
                                                                    System.out.println("WarrantyCheckFragment.activateDeviceDelegateSuccess: here");
                                                                    if (warrentyCheckDetails != null &&
@@ -240,7 +236,7 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
         inflatedView = inflater.inflate(R.layout.fragment_warrenty_check, container, false);
         findViews(inflatedView);
         getDeviceIMEI();
-        checkCachedData();
+        checkCachedData(true);
         validateHomeScreen();
 
 
@@ -262,7 +258,7 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
         }
     }
 
-    private void checkCachedData() {
+    private void checkCachedData(boolean updateIt) {
         WarrentyCheckDetails warrentyCheckDetails = RajaCacheUtils.getWarrantyCheckData(getActivity());
 
         try {
@@ -295,7 +291,7 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
 
                 if (warrentyCheckDetails.getEnd_date() != null) {
 
-                        endDate.setText(String.format("%s  %s", getString(R.string.endDate), warrentyCheckDetails.getEnd_date()));
+                    endDate.setText(String.format("%s  %s", getString(R.string.endDate), warrentyCheckDetails.getEnd_date()));
                 } else {
                     endDate.setText("");
                     endDate.setVisibility(View.GONE);
@@ -315,6 +311,85 @@ public class WarrantyCheckFragment extends Fragment implements TabStacker.TabSta
                 } else {
                     note.setText("");
                     note.setVisibility(View.GONE);
+                }
+
+                if (updateIt &&
+                        warrentyCheckDetails.getImei1() != null) {
+
+                    ScreenUtils.showLoader(getActivity());
+                    detailsView.setVisibility(View.GONE);
+                    System.out.println("WarrantyCheckFragment.onClick");
+
+                    Connection.activateWarrantyForIMEI(new ActivateMobileNumberDelegate() {
+                                                           @Override
+                                                           public void activateDeviceDelegateSuccess(WarrentyCheckDetails warrentyCheckDetails) {
+                                                               System.out.println("WarrantyCheckFragment.getWarrantyDelegateSuccess");
+                                                               try {
+                                                                   System.out.println("warrentyCheckDetails = [" + warrentyCheckDetails.getEnd_date() + "]");
+                                                                   System.out.println("warrentyCheckDetails = [" + warrentyCheckDetails.getStart_date() + "]");
+                                                                   System.out.println("warrentyCheckDetails = [" + warrentyCheckDetails.getImei1() + "]");
+                                                                   System.out.println("warrentyCheckDetails = [" + warrentyCheckDetails.getStatus() + "]");
+                                                                   System.out.println("warrentyCheckDetails = [" + warrentyCheckDetails.getError() + "]");
+
+
+                                                               } catch (Exception ex) {
+                                                                   ex.printStackTrace();
+                                                               }
+
+                                                               ScreenUtils.dismissLoader();
+
+                                                               if (warrentyCheckDetails != null &&
+                                                                       warrentyCheckDetails.getStart_date() != null &&
+                                                                       warrentyCheckDetails.getEnd_date() != null &&
+                                                                       warrentyCheckDetails.getEnd_date().length() > 0 &&
+                                                                       warrentyCheckDetails.getStart_date().length() > 0) {
+
+
+                                                                   RajaCacheUtils.cacheThisWarrantyCheckData(getActivity(), warrentyCheckDetails);
+                                                                   checkCachedData(false);
+                                                               } else {
+                                                                   System.out.println("WarrantyCheckFragment.activateDeviceDelegateSuccess: here");
+                                                                   if (warrentyCheckDetails != null &&
+                                                                           warrentyCheckDetails.getError() != null) {
+
+                                                                       showErrorMessage(getString(R.string.sorry), warrentyCheckDetails.getError());
+                                                                   } else {
+                                                                       showErrorMessage(getString(R.string.sorry), getString(R.string.connectionError));
+
+                                                                   }
+                                                               }
+
+                                                           }
+
+                                                           @Override
+                                                           public void activateDeviceDelegateFailure(String error) {
+                                                               System.out.println("WarrantyCheckFragment.getWarrantyDelegateFailure");
+                                                               ScreenUtils.dismissLoader();
+                                                               detailsView.setVisibility(View.GONE);
+                                                               showErrorMessage(getString(R.string.sorry), error);
+
+                                                           }
+
+                                                           @Override
+                                                           public void activateDeviceDelegateParameterError() {
+                                                               detailsView.setVisibility(View.GONE);
+                                                               System.out.println("WarrantyCheckFragment.getWarrantyConnectionErrorDelegate");
+                                                               ScreenUtils.dismissLoader();
+                                                               showErrorMessage(getString(R.string.sorry), getString(R.string.connectionError));
+//                                                               Toast.makeText(getActivity(), "Make sure you entered IMEI code.", Toast.LENGTH_LONG).show();
+                                                           }
+
+                                                           @Override
+                                                           public void activateDeviceConnectionErrorDelegate() {
+                                                               detailsView.setVisibility(View.GONE);
+                                                               System.out.println("WarrantyCheckFragment.getWarrantyConnectionErrorDelegate");
+                                                               ScreenUtils.dismissLoader();
+
+                                                               showErrorMessage(getString(R.string.sorry), getString(R.string.connectionError));
+                                                           }
+                                                       }, warrantyEditText.getText().toString().trim(),
+                            mobileEditText.getText().toString(),
+                            getActivity());
                 }
             } else {
                 System.out.println("WarrantyCheckFragment.checkCachedData : the data is missed, do nothing here");
