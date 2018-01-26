@@ -64,6 +64,8 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
     private CardView sonyCard;
     private CardView htcCard;
     private CardView lgCard;
+    private CardView CATCard;
+    private CardView HaierCard;
 
     public RagaListFragment() {
         // Required empty public constructor
@@ -91,6 +93,8 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
         sonyCard = (CardView) rootView.findViewById(R.id.sonyCard);
         htcCard = (CardView) rootView.findViewById(R.id.htcCard);
         lgCard = (CardView) rootView.findViewById(R.id.lgCard);
+        CATCard = (CardView) rootView.findViewById(R.id.CATCard);
+        HaierCard = (CardView) rootView.findViewById(R.id.HaierCard);
 
         allCard.setOnClickListener(this);
         iphoneCard.setOnClickListener(this);
@@ -98,6 +102,8 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
         sonyCard.setOnClickListener(this);
         htcCard.setOnClickListener(this);
         lgCard.setOnClickListener(this);
+        CATCard.setOnClickListener(this);
+        HaierCard.setOnClickListener(this);
     }
 
     @Override
@@ -835,6 +841,12 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
         } else if (v == lgCard) {
             filterMobilesOn("lg");
 
+        } else if (v == CATCard) {
+            filterMobilesOn("cat");
+
+        } else if (v == HaierCard) {
+            filterMobilesOn("haier");
+
         }
     }
 
@@ -851,6 +863,8 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
             htcCard.setCardBackgroundColor(Color.WHITE);
             sonyCard.setCardBackgroundColor(Color.WHITE);
             lgCard.setCardBackgroundColor(Color.WHITE);
+            CATCard.setCardBackgroundColor(Color.WHITE);
+            HaierCard.setCardBackgroundColor(Color.WHITE);
         } else if (type.equalsIgnoreCase("iphone")) {
             filteredMobilesList = new ArrayList<>();
             for (int i = 0; i < mobilesList.size(); i++) {
@@ -866,6 +880,8 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
             htcCard.setCardBackgroundColor(Color.WHITE);
             sonyCard.setCardBackgroundColor(Color.WHITE);
             lgCard.setCardBackgroundColor(Color.WHITE);
+            CATCard.setCardBackgroundColor(Color.WHITE);
+            HaierCard.setCardBackgroundColor(Color.WHITE);
         } else if (type.equalsIgnoreCase("samsung")) {
             filteredMobilesList = new ArrayList<>();
             for (int i = 0; i < mobilesList.size(); i++) {
@@ -880,6 +896,8 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
             htcCard.setCardBackgroundColor(Color.WHITE);
             sonyCard.setCardBackgroundColor(Color.WHITE);
             lgCard.setCardBackgroundColor(Color.WHITE);
+            CATCard.setCardBackgroundColor(Color.WHITE);
+            HaierCard.setCardBackgroundColor(Color.WHITE);
         } else if (type.equalsIgnoreCase("sony")) {
             filteredMobilesList = new ArrayList<>();
             for (int i = 0; i < mobilesList.size(); i++) {
@@ -894,6 +912,8 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
             htcCard.setCardBackgroundColor(Color.WHITE);
             sonyCard.setCardBackgroundColor(Color.parseColor("#ee3c34"));
             lgCard.setCardBackgroundColor(Color.WHITE);
+            CATCard.setCardBackgroundColor(Color.WHITE);
+            HaierCard.setCardBackgroundColor(Color.WHITE);
         } else if (type.equalsIgnoreCase("htc")) {
             filteredMobilesList = new ArrayList<>();
             for (int i = 0; i < mobilesList.size(); i++) {
@@ -908,6 +928,8 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
             htcCard.setCardBackgroundColor(Color.parseColor("#ee3c34"));
             sonyCard.setCardBackgroundColor(Color.WHITE);
             lgCard.setCardBackgroundColor(Color.WHITE);
+            CATCard.setCardBackgroundColor(Color.WHITE);
+            HaierCard.setCardBackgroundColor(Color.WHITE);
         } else if (type.equalsIgnoreCase("lg")) {
             filteredMobilesList = new ArrayList<>();
             for (int i = 0; i < mobilesList.size(); i++) {
@@ -922,7 +944,43 @@ public class RagaListFragment extends Fragment implements TabStacker.TabStackInt
             samsungCard.setCardBackgroundColor(Color.WHITE);
             htcCard.setCardBackgroundColor(Color.WHITE);
             sonyCard.setCardBackgroundColor(Color.WHITE);
+            CATCard.setCardBackgroundColor(Color.WHITE);
+            HaierCard.setCardBackgroundColor(Color.WHITE);
             lgCard.setCardBackgroundColor(Color.parseColor("#ee3c34"));
+        }else if (type.equalsIgnoreCase("cat")) {
+            filteredMobilesList = new ArrayList<>();
+            for (int i = 0; i < mobilesList.size(); i++) {
+                if (mobilesList.get(i).getCompany().toLowerCase().contains("cat")) {
+                    filteredMobilesList.add(mobilesList.get(i));
+                }
+            }
+
+            updateListFor(filteredMobilesList);
+            allCard.setCardBackgroundColor(Color.WHITE);
+            iphoneCard.setCardBackgroundColor(Color.WHITE);
+            samsungCard.setCardBackgroundColor(Color.WHITE);
+            htcCard.setCardBackgroundColor(Color.WHITE);
+            sonyCard.setCardBackgroundColor(Color.WHITE);
+            HaierCard.setCardBackgroundColor(Color.WHITE);
+            CATCard.setCardBackgroundColor(Color.parseColor("#ee3c34"));
+            lgCard.setCardBackgroundColor(Color.WHITE);
+        } else if (type.equalsIgnoreCase("haier")) {
+            filteredMobilesList = new ArrayList<>();
+            for (int i = 0; i < mobilesList.size(); i++) {
+                if (mobilesList.get(i).getCompany().toLowerCase().contains("haier")) {
+                    filteredMobilesList.add(mobilesList.get(i));
+                }
+            }
+
+            updateListFor(filteredMobilesList);
+            allCard.setCardBackgroundColor(Color.WHITE);
+            iphoneCard.setCardBackgroundColor(Color.WHITE);
+            samsungCard.setCardBackgroundColor(Color.WHITE);
+            htcCard.setCardBackgroundColor(Color.WHITE);
+            sonyCard.setCardBackgroundColor(Color.WHITE);
+            CATCard.setCardBackgroundColor(Color.WHITE);
+            HaierCard.setCardBackgroundColor(Color.parseColor("#ee3c34"));
+            lgCard.setCardBackgroundColor(Color.WHITE);
         }
     }
 

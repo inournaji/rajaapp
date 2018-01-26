@@ -43,7 +43,7 @@
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/allCard"
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:elevation="5dp"
@@ -65,7 +65,7 @@
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/iphoneCard"
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_toEndOf="@+id/allCard"
@@ -88,7 +88,7 @@
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/samsungCard"
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_toEndOf="@+id/iphoneCard"
@@ -110,7 +110,7 @@
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/sonyCard"
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_toEndOf="@+id/samsungCard"
@@ -134,7 +134,7 @@
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/htcCard"
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_toEndOf="@+id/sonyCard"
@@ -157,7 +157,7 @@
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/lgCard"
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_toEndOf="@+id/htcCard"
@@ -177,6 +177,50 @@
 
                 </android.support.v7.widget.CardView>
 
+                <android.support.v7.widget.CardView
+                    android:id="@+id/HaierCard"
+                    android:layout_width="110dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_toEndOf="@+id/lgCard"
+                    android:elevation="5dp"
+                    app:cardCornerRadius="7dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:text="Haier"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/CATCard"
+                    android:layout_width="110dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_toEndOf="@+id/HaierCard"
+                    android:elevation="5dp"
+                    app:cardCornerRadius="7dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center"
+                        android:text="CAT"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+                </android.support.v7.widget.CardView>
 
             </RelativeLayout>
         </HorizontalScrollView>
